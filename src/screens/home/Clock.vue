@@ -1,5 +1,6 @@
 <template lang="pug">
 	div.Clock
+		AnalogClock(:time="time" width="200" height="200")
 		DigitalClock(:hours="hours" :minutes="minutes" :seconds="seconds")
 </template>
 
@@ -9,10 +10,12 @@
 </style>
 
 <script>
+	const AnalogClock = require('./AnalogClock.vue')
 	const DigitalClock = require('./DigitalClock.vue')
 
 	module.exports = {
 		components: {
+			AnalogClock,
 			DigitalClock,
 		},
 

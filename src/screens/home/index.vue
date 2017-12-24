@@ -33,7 +33,7 @@
 		mounted() {
 			this.tmUpdateTime = setInterval(() => {
 				this.time = new Date()
-			}, 100)
+			}, 10)
 		},
 
 		destroyed() {

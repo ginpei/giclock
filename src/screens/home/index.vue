@@ -4,6 +4,8 @@
 		ul
 			li
 				router-link(to="/settings") Settings
+
+		Clock(:time="time")
 </template>
 
 <style lang="sass" scoped>
@@ -11,18 +13,31 @@
 
 <script>
 	const Wrapper = require('../../components/base-layout/index.vue')
+	const Clock = require('./Clock.vue')
 
 	module.exports = {
 		components: {
 			Wrapper,
+			Clock,
 		},
 
 		data() {
 			return {
+				time: null,
 			}
 		},
 
 		computed: {
+		},
+
+		mounted() {
+			this.tmUpdateTime = setInterval(() => {
+				this.time = new Date()
+			}, 100)
+		},
+
+		destroyed() {
+			clearInterval(this.tmUpdateTime)
 		},
 
 		methods: {

@@ -1,6 +1,6 @@
 <template lang="pug">
 	div.Clock
-		p {{hours}}:{{minutes | digi2}}:{{seconds}}
+		DigitalClock(:hours="hours" :minutes="minutes" :seconds="seconds")
 </template>
 
 <style lang="sass" scoped>
@@ -9,7 +9,13 @@
 </style>
 
 <script>
+	const DigitalClock = require('./DigitalClock.vue')
+
 	module.exports = {
+		components: {
+			DigitalClock,
+		},
+
 		props: [
 			'time',
 		],
@@ -18,29 +24,17 @@
 			available(){
 				return Boolean(this.time)
 			},
+
 			hours(){
 				return this.time && this.time.getHours()
 			},
+
 			minutes(){
 				return this.time && this.time.getMinutes()
 			},
+
 			seconds(){
 				return this.time && this.time.getSeconds()
-			},
-		},
-
-		filters: {
-			/**
-			 * Make the number in 2 digits.
-			 * @param {number} n 0 to 99.
-			 * @returns {string}
-			 */
-			digi2(n) {
-				if (typeof n === 'number' && !isNaN(n)) {
-					return n < 10 ? '0' + n : n.toString()
-				} else {
-					return ''
-				}
 			},
 		},
 	}

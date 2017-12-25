@@ -6,7 +6,7 @@
     "dev": "watchify -dv -t vueify -p browserify-hmr -e src/index.js -o build/app.js",
     "lint": "eslint --ext js,vue src/",
     "postinstall": "mkdir build || echo OK",
-    "start": "npm run lint -s & npm run dev -s"
+    "start": "npm run lint -s & concurrently \"npm run server -s\" \"npm run dev -s\""
   },
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "browserify-hmr": "^0.3.5",
+    "concurrently": "^3.5.1",
     "eslint": "^4.2.0",
     "eslint-plugin-vue": "^3.6.0",
     "watchify": "^3.9.0"

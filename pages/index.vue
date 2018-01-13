@@ -2,8 +2,11 @@
   section.container.pinCenter(:data-vertical="vertical" :style="style")
     div.pinCenter(:style="boxStyle")
       AnalogClock.analogClock(:now="now")
-    div.pinCenter(:style="boxStyle")
-      DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
+    div.multiPanel(:style="boxStyle")
+      div.pinCenter.topLine(ref="digitalClockContainer")
+        DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
+      div.leftBottom X
+      div.rightBottom Z
 </template>
 
 <script>
@@ -70,9 +73,20 @@ export default {
       this.vertical = h > w
       this.boxLength = this.vertical ? Math.min(w, h / 2) : Math.min(w / 2, h)
 
+      // wait for container element's size is updated
+      // there should be better way tho...
+      await new Promise(resolve => setTimeout(resolve, 1))
+
+      this.updateDigitalClockScale()
+    },
+
+    updateDigitalClockScale () {
       const elClock = this.$refs.digitalClock.$el
-      const clockEdgeLength = Math.max(elClock.clientWidth, elClock.clientHeight)
-      this.digitalClockScale = this.boxLength / clockEdgeLength
+      const elContainer = this.$refs.digitalClockContainer
+
+      const wScale = elContainer.clientWidth / elClock.clientWidth
+      const hScale = elContainer.clientHeight / elClock.clientHeight
+      this.digitalClockScale = Math.min(wScale, hScale)
     }
   }
 }
@@ -94,4 +108,21 @@ export default {
 .analogClock
   height: 100%
   width: 100%
+
+.multiPanel
+  display: grid
+  grid-template-columns: 1fr, 1fr
+  grid-template-rows: 1fr, 1fr
+
+.topLine
+  grid-column: 1 / 3
+  grid-row: 1
+
+.leftBottom
+  grid-column: 1
+  grid-row: 2
+
+.rightBottom
+  grid-column: 2
+  grid-row: 2
 </style>

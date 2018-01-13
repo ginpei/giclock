@@ -33,5 +33,6 @@ export default {
 
 <style lang="sass" scoped>
 .DigitalClock
-  font-family: monospace
+  font-family: "Share Tech Mono", monospace
+  font-size: 50px
 </style>

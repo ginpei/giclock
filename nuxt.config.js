@@ -10,6 +10,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Clock' }
     ],
     link: [
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Share+Tech+Mono' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },

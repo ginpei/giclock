@@ -1,10 +1,10 @@
 <template lang="pug">
   div.AnalogClock
     svg(version="1.1" baseProfile="full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg")
-      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" stroke="tomato" fill="transparent")
-      AnalogClockNeedle(:size="length" :length="length * 0.3" :progress="hoursProgress" width="10" fill="limegreen")
-      AnalogClockNeedle(:size="length" :length="length * 0.4" :progress="minutesProgress" width="3" fill="green")
-      AnalogClockNeedle(:size="length" :length="length * 0.45" :progress="secondProgress" width="1" fill="tomato")
+      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" stroke="#0f9" fill="transparent")
+      AnalogClockNeedle(:size="length" :length="length * 0.3" :progress="hoursProgress" width="5" fill="#0f9")
+      AnalogClockNeedle(:size="length" :length="length * 0.4" :progress="minutesProgress" width="3" fill="#0f9")
+      AnalogClockNeedle(:size="length" :length="length * 0.45" :progress="secondProgress" width="1" fill="#0f9")
 </template>
 
 <script>

@@ -35,6 +35,8 @@ export default {
 
 <style lang="sass" scoped>
 .container
+  background-color: #000
+  color: #0f9
   min-height: 100vh
   display: flex
   justify-content: center

@@ -1,11 +1,10 @@
-<template>
-  <div class="DigitalClock">
-    <span class="hours">{{sHours}}</span>
-    <span class="delimiter">:</span>
-    <span class="minutes">{{sMinutes}}</span>
-    <span class="delimiter">:</span>
-    <span class="seconds">{{sSeconds}}</span>
-  </div>
+<template lang="pug">
+  div.DigitalClock
+    span.hours {{sHours}}
+    span.delimiter :
+    span.minutes {{sMinutes}}
+    span.delimiter :
+    span.seconds {{sSeconds}}
 </template>
 
 <script>
@@ -49,8 +48,7 @@ export default {
 }
 </script>
 
-<style>
-.DigitalClock {
-  font-family: monospace;
-}
+<style lang="sass">
+.DigitalClock
+  font-family: monospace
 </style>

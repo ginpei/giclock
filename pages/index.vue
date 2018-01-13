@@ -1,7 +1,6 @@
-<template>
-  <section class="container">
-    <DigitalClock />
-  </section>
+<template lang="pug">
+  section.container
+    DigitalClock
 </template>
 
 <script>
@@ -14,12 +13,11 @@ export default {
 }
 </script>
 
-<style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+<style lang="sass">
+.container
+  min-height: 100vh
+  display: flex
+  justify-content: center
+  align-items: center
+  text-align: center
 </style>

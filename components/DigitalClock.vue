@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .DigitalClock
   font-family: monospace
 </style>

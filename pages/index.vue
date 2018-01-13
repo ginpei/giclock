@@ -1,7 +1,7 @@
 <template lang="pug">
   section.container.pinCenter(:data-vertical="vertical")
     div.pinCenter(:style="boxStyle")
-      AnalogClock(:now="now" style="width: 200px; height: 200px")
+      AnalogClock.analogClock(:now="now")
     div.pinCenter(:style="boxStyle")
       DigitalClock(:now="now")
 </template>
@@ -73,4 +73,8 @@ export default {
 
   &[data-vertical="true"]
     flex-direction: column
+
+.analogClock
+  height: 100%
+  width: 100%
 </style>

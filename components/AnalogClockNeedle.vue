@@ -1,5 +1,5 @@
 <template lang="pug">
-  rect(:width="width" :height="length" :fill="fill" :transform="transform" x="0" y="0")
+  rect(:width="width" :height="length" :fill="fill" :transform="transform" x="0" y="0" opacity="0.5")
 </template>
 
 <script>

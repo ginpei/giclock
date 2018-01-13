@@ -1,6 +1,6 @@
 <template lang="pug">
   section.container
-    DigitalClock
+    DigitalClock(:now="now")
 </template>
 
 <script>
@@ -9,6 +9,23 @@ import DigitalClock from '~/components/DigitalClock.vue'
 export default {
   components: {
     DigitalClock
+  },
+
+  data () {
+    return {
+      now: new Date()
+    }
+  },
+
+  mounted () {
+    this.tmTick = setInterval(() => {
+      this.now = new Date()
+    }, 100)
+  },
+
+  destroyed () {
+    console.log('destroyed')
+    clearInterval(this.tmTick)
   }
 }
 </script>

@@ -8,42 +8,25 @@
 </template>
 
 <script>
+import { sHours, sMinutes, sSeconds } from '~/middleware/time.js'
+
 export default {
-  data () {
-    return {
-      now: new Date()
-    }
-  },
+  props: [
+    'now'
+  ],
 
   computed: {
     sHours () {
-      const n = this.now.getHours()
-      const s = n < 10 ? `0${n}` : String(n)
-      return s
+      return sHours(this.now)
     },
 
     sMinutes () {
-      const n = this.now.getMinutes()
-      const s = n < 10 ? `0${n}` : String(n)
-      return s
+      return sMinutes(this.now)
     },
 
     sSeconds () {
-      const n = this.now.getSeconds()
-      const s = n < 10 ? `0${n}` : String(n)
-      return s
+      return sSeconds(this.now)
     }
-  },
-
-  mounted () {
-    this.tmTick = setInterval(() => {
-      this.now = new Date()
-    }, 100)
-  },
-
-  destroyed () {
-    console.log('destroyed')
-    clearInterval(this.tmTick)
   }
 }
 </script>

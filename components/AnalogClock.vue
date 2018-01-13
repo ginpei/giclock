@@ -37,7 +37,7 @@ export default {
     },
 
     hoursProgress () {
-      return this.now.getHours() % 12 / 12
+      return (this.now.getHours() % 12 + this.minutesProgress) / 12
     },
 
     minutesProgress () {

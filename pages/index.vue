@@ -5,18 +5,22 @@
     div.multiPanel(:style="boxStyle")
       div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
-      div.leftBottom X
-      div.rightBottom Z
+      div.leftBottom
+        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :startedAt="pomodoroStartedAt" :now="now" length="25")
+      div.rightBottom
+        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :startedAt="pomodoroStartedAt" :now="now" length="25")
 </template>
 
 <script>
 import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
+import PomodoroButton from '~/components/PomodoroButton.vue'
 
 export default {
   components: {
     AnalogClock,
-    DigitalClock
+    DigitalClock,
+    PomodoroButton
   },
 
   data () {
@@ -24,6 +28,7 @@ export default {
       boxLength: 0,
       digitalClockScale: 0,
       now: new Date(),
+      pomodoroStartedAt: 0,
       vertical: false
     }
   },
@@ -87,6 +92,15 @@ export default {
       const wScale = elContainer.clientWidth / elClock.clientWidth
       const hScale = elContainer.clientHeight / elClock.clientHeight
       this.digitalClockScale = Math.min(wScale, hScale)
+    },
+
+    onPress_pomodoro () {
+      if (this.pomodoroStartedAt !== 0) {
+        this.pomodoroStartedAt = 0
+      } else {
+        const now = Date.now()
+        this.pomodoroStartedAt = now - now % 1000 // remove ms
+      }
     }
   }
 }
@@ -95,6 +109,10 @@ export default {
 <style lang="sass" scoped>
 .container
   min-height: 100vh
+
+  &,
+  & button
+    font-family: "Share Tech Mono", monospace
 
 .pinCenter
   display: flex
@@ -125,4 +143,8 @@ export default {
 .rightBottom
   grid-column: 2
   grid-row: 2
+
+.pomodoroButton
+  height: 100%
+  width: 100%
 </style>

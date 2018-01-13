@@ -45,7 +45,7 @@ export default {
       this.now = new Date()
     }, 100)
 
-    this.f_updateLayout = () => this.updateLayout(this.$el)
+    this.f_updateLayout = () => this.updateLayout()
     window.addEventListener('resize', this.f_updateLayout)
     this.f_updateLayout()
   },
@@ -56,11 +56,12 @@ export default {
   },
 
   methods: {
-    updateLayout (el) {
+    async updateLayout () {
+      const el = document.scrollingElement
       const w = el.clientWidth
       const h = el.clientHeight
-      this.boxLength = Math.max(w, h) / 2
       this.vertical = h > w
+      this.boxLength = this.vertical ? Math.min(w, h / 2) : Math.min(w / 2, h)
 
       const elClock = this.$refs.digitalClock.$el
       const clockEdgeLength = Math.max(elClock.clientWidth, elClock.clientHeight)

@@ -1,13 +1,16 @@
 <template lang="pug">
   section.container
+    AnalogClock(:now="now")
     DigitalClock(:now="now")
 </template>
 
 <script>
+import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
 
 export default {
   components: {
+    AnalogClock,
     DigitalClock
   },
 

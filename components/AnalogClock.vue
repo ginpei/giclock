@@ -52,10 +52,6 @@ export default {
   mounted () {
     this.height = this.$el.clientHeight
     this.width = this.$el.clientWidth
-  },
-
-  updated () {
-    console.log('# update')
   }
 }
 </script>

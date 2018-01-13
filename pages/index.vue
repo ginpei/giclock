@@ -27,7 +27,6 @@ export default {
   },
 
   destroyed () {
-    console.log('destroyed')
     clearInterval(this.tmTick)
   }
 }

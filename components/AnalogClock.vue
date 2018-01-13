@@ -1,10 +1,10 @@
 <template lang="pug">
   div.AnalogClock
     svg(version="1.1" baseProfile="full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg")
-      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" stroke="#0f9" fill="transparent" opacity="0.5")
-      AnalogClockNeedle(:size="length" :length="length * 0.3" :progress="hoursProgress" :width="length * 0.04" fill="#0f9")
-      AnalogClockNeedle(:size="length" :length="length * 0.4" :progress="minutesProgress" :width="length * 0.02" fill="#0f9")
-      AnalogClockNeedle(:size="length" :length="length * 0.44" :progress="secondProgress" :width="length * 0.01" fill="#0f9")
+      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" :stroke="fgColor" fill="transparent" opacity="0.5")
+      AnalogClockNeedle(:size="length" :length="length * 0.3" :progress="hoursProgress" :width="length * 0.04" :fill="fgColor")
+      AnalogClockNeedle(:size="length" :length="length * 0.4" :progress="minutesProgress" :width="length * 0.02" :fill="fgColor")
+      AnalogClockNeedle(:size="length" :length="length * 0.44" :progress="secondProgress" :width="length * 0.01" :fill="fgColor")
 </template>
 
 <script>
@@ -28,6 +28,10 @@ export default {
   },
 
   computed: {
+    fgColor () {
+      return this.$store.state.preferences.fgColor
+    },
+
     length () {
       return Math.min(this.height, this.width)
     },

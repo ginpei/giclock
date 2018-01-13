@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.container.pinCenter(:data-vertical="vertical")
+  section.container.pinCenter(:data-vertical="vertical" :style="style")
     div.pinCenter(:style="boxStyle")
       AnalogClock.analogClock(:now="now")
     div.pinCenter(:style="boxStyle")
@@ -26,6 +26,13 @@ export default {
   },
 
   computed: {
+    style () {
+      return {
+        backgroundColor: this.$store.state.preferences.bgColor,
+        color: this.$store.state.preferences.fgColor
+      }
+    },
+
     boxStyle () {
       return {
         height: `${this.boxLength}px`,
@@ -73,8 +80,6 @@ export default {
 
 <style lang="sass" scoped>
 .container
-  background-color: #000
-  color: #0f9
   min-height: 100vh
 
 .pinCenter

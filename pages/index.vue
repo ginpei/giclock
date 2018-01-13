@@ -3,7 +3,7 @@
     div.pinCenter(:style="boxStyle")
       AnalogClock.analogClock(:now="now")
     div.pinCenter(:style="boxStyle")
-      DigitalClock(:now="now")
+      DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
 </template>
 
 <script>
@@ -19,6 +19,7 @@ export default {
   data () {
     return {
       boxLength: 0,
+      digitalClockScale: 0,
       now: new Date(),
       vertical: false
     }
@@ -29,6 +30,12 @@ export default {
       return {
         height: `${this.boxLength}px`,
         width: `${this.boxLength}px`
+      }
+    },
+
+    digitalClockStyle () {
+      return {
+        transform: `scale(${this.digitalClockScale})`
       }
     }
   },
@@ -54,6 +61,10 @@ export default {
       const h = el.clientHeight
       this.boxLength = Math.max(w, h) / 2
       this.vertical = h > w
+
+      const elClock = this.$refs.digitalClock.$el
+      const clockEdgeLength = Math.max(elClock.clientWidth, elClock.clientHeight)
+      this.digitalClockScale = this.boxLength / clockEdgeLength
     }
   }
 }

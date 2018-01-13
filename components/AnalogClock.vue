@@ -49,9 +49,15 @@ export default {
     }
   },
 
-  mounted () {
-    this.height = this.$el.clientHeight
-    this.width = this.$el.clientWidth
+  updated () {
+    this.updateLayout(this.$el)
+  },
+
+  methods: {
+    updateLayout (el) {
+      this.height = el.clientHeight
+      this.width = el.clientWidth
+    }
   }
 }
 </script>

@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .container
   min-height: 100vh
   display: flex

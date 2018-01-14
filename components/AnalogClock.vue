@@ -1,7 +1,7 @@
 <template lang="pug">
   div.AnalogClock
     svg(version="1.1" baseProfile="full" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg")
-      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" :stroke="fgColor" fill="transparent" opacity="0.5")
+      circle(:cx="length / 2" :cy="length / 2" :r="circleRadius" :stroke="fgColor" fill="transparent")
       AnalogClockNeedle(:size="length" :length="length * 0.3" :progress="hoursProgress" :width="length * 0.04" :fill="fgColor")
       AnalogClockNeedle(:size="length" :length="length * 0.4" :progress="minutesProgress" :width="length * 0.02" :fill="fgColor")
       AnalogClockNeedle(:size="length" :length="length * 0.44" :progress="secondProgress" :width="length * 0.01" :fill="fgColor")

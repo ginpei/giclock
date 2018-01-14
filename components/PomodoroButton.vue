@@ -70,5 +70,5 @@ export default {
   border-style: solid
   border-width: 1px
   box-sizing: border-box
-  font-size: 5vw
+  font-size: 5rem
 </style>

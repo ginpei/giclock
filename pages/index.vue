@@ -1,14 +1,14 @@
 <template lang="pug">
-  section.container.pinCenter(:data-vertical="vertical" :style="style")
-    div.pinCenter(:style="boxStyle")
+  section.container.pinCenter(:style="style")
+    div.layoutBox.pinCenter
       AnalogClock.analogClock(:now="now")
-    div.multiPanel(:style="boxStyle")
+    div.layoutBox.multiPanel
       div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
       div.leftBottom
         PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
-      div.rightBottom
-        X
+      div.rightBottom.pinCenter
+        p Lorem aperiam facere ipsam nemo necessitatibus Dolorem aliquam sint molestias expedita repellendus? Perspiciatis facere tempore dignissimos sed ipsum Dolorem totam magnam alias nulla obcaecati ea quam, dolor? Aliquid incidunt consectetur
 </template>
 
 <script>
@@ -25,11 +25,9 @@ export default {
 
   data () {
     return {
-      boxLength: 0,
       digitalClockScale: 0,
       now: new Date(),
-      pomodoroStartedAt: 0,
-      vertical: false
+      pomodoroStartedAt: 0
     }
   },
 
@@ -38,13 +36,6 @@ export default {
       return {
         backgroundColor: this.$store.state.preferences.bgColor,
         color: this.$store.state.preferences.fgColor
-      }
-    },
-
-    boxStyle () {
-      return {
-        height: `${this.boxLength}px`,
-        width: `${this.boxLength}px`
       }
     },
 
@@ -86,18 +77,19 @@ export default {
   },
 
   methods: {
-    async updateLayout () {
+    updateLayout () {
+      this.updateRootFontSize()
+      this.updateDigitalClockScale()
+    },
+
+    updateRootFontSize () {
       const el = document.scrollingElement
       const w = el.clientWidth
       const h = el.clientHeight
-      this.vertical = h > w
-      this.boxLength = this.vertical ? Math.min(w, h / 2) : Math.min(w / 2, h)
+      const length = h > w ? Math.min(w, h / 2) : Math.min(w / 2, h)
 
-      // wait for container element's size is updated
-      // there should be better way tho...
-      await new Promise(resolve => setTimeout(resolve, 1))
-
-      this.updateDigitalClockScale()
+      // affects rem unit
+      document.documentElement.style.fontSize = `${length / 50}px`
     },
 
     updateDigitalClockScale () {
@@ -128,14 +120,23 @@ export default {
   & button
     font-family: "Share Tech Mono", monospace
 
+.layoutBox
+  height: 50rem
+  width: 50rem
+
 .pinCenter
   display: flex
   justify-content: center
   align-items: center
   text-align: center
 
-  &[data-vertical="true"]
-    flex-direction: column
+  @media (orientation: portrait)
+    &
+      flex-direction: column
+
+  @media (orientation: landscape)
+    &
+      flex-direction: row
 
 .analogClock
   height: 100%

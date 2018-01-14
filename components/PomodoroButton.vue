@@ -20,8 +20,12 @@ export default {
   computed: {
     style () {
       return {
-        color: this.$store.state.preferences.fgColor
+        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor
       }
+    },
+
+    exceeded () {
+      return this.restTime < 0
     },
 
     sLength () {

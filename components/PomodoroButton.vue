@@ -30,7 +30,6 @@ export default {
 
     sLength () {
       const min = Math.floor(this.length / 1000 / 60) // ms -> m
-      console.log('# this.length, min', this.length, min)
       return `${min}m`
     },
 

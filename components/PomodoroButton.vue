@@ -1,11 +1,11 @@
 <template lang="pug">
   button.PomodoroButton(@click="onClick" :style="style")
-    span(v-if="startedAt === 0")
+    span(v-if="working")
+      | {{sRestTime}}
+    span(v-else)
       | Start
       br
-      | {{length}}m
-    span(v-else)
-      | {{sRestTime}}
+      | {{sLength}}
 </template>
 
 <script>
@@ -13,7 +13,8 @@ export default {
   props: [
     'length',
     'now',
-    'startedAt'
+    'restTime',
+    'working'
   ],
 
   computed: {
@@ -23,17 +24,10 @@ export default {
       }
     },
 
-    /**
-     * @returns {number} Rest time in ms.
-     */
-    restTime () {
-      if (this.startedAt === 0) {
-        return NaN
-      }
-
-      const length = this.length * 60 * 1000
-      const restTime = this.startedAt + length - this.now
-      return restTime
+    sLength () {
+      const min = Math.floor(this.length / 1000 / 60) // ms -> m
+      console.log('# this.length, min', this.length, min)
+      return `${min}m`
     },
 
     /**

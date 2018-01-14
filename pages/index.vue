@@ -6,9 +6,9 @@
       div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
       div.leftBottom
-        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :startedAt="pomodoroStartedAt" :now="now" length="25")
+        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom
-        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :startedAt="pomodoroStartedAt" :now="now" length="25")
+        X
 </template>
 
 <script>
@@ -52,6 +52,21 @@ export default {
       return {
         transform: `scale(${this.digitalClockScale})`
       }
+    },
+
+    pomodoroWorking () {
+      return this.$store.getters['pomodoro/working']
+    },
+
+    /**
+     * @returns {number} Rest time in ms.
+     */
+    pomodoroRestTime () {
+      return this.$store.getters['pomodoro/getRestTime'](this.now.getTime())
+    },
+
+    pomodoroLength () {
+      return this.$store.state.pomodoro.length
     }
   },
 
@@ -95,11 +110,10 @@ export default {
     },
 
     onPress_pomodoro () {
-      if (this.pomodoroStartedAt !== 0) {
-        this.pomodoroStartedAt = 0
+      if (this.pomodoroWorking) {
+        this.$store.dispatch('pomodoro/stop')
       } else {
-        const now = Date.now()
-        this.pomodoroStartedAt = now - now % 1000 // remove ms
+        this.$store.dispatch('pomodoro/start')
       }
     }
   }

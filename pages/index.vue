@@ -143,8 +143,8 @@ export default {
 
 .multiPanel
   display: grid
-  grid-template-columns: 1fr, 1fr
-  grid-template-rows: 1fr, 1fr
+  grid-template-columns: 1fr 1fr
+  grid-template-rows: 1fr 1fr
 
 .topLine
   grid-column: 1 / 3

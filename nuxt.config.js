@@ -11,6 +11,7 @@ module.exports = {
     ],
     link: [
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Share+Tech+Mono' },
+      { rel: 'stylesheet', href: 'https://use.fontawesome.com/releases/v5.0.4/css/all.css' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
     ],
   },

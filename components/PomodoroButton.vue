@@ -1,11 +1,19 @@
 <template lang="pug">
-  button.PomodoroButton(@click="onClick" :style="style")
-    span(v-if="working")
+  span.PomodoroButton
+    button.mainButton(v-show="working" @click="pauseButton_onClick" :style="mainButtonStyle")
       | {{sRestTime}}
-    span(v-else)
-      | Start
       br
-      | {{sLength}}
+      i.fa.fa-pause-circle
+    button.subButton(v-show="working" @click="stopButton_onClick" :style="subButtonStyle" disabled)
+      i.fa.fa-stop-circle
+      |  Reset
+    button.mainButton(v-show="!working" @click="startButton_onClick" :style="mainButtonStyle")
+      |  {{sLength}}
+      br
+      i.fa.fa-play-circle
+    button.subButton(v-show="!working" @click="configButton_onClick" :style="subButtonStyle")
+      i.fa.fa-stopwatch
+      |  Set time
 </template>
 
 <script>
@@ -18,7 +26,13 @@ export default {
   ],
 
   computed: {
-    style () {
+    mainButtonStyle () {
+      return {
+        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor,
+      }
+    },
+
+    subButtonStyle () {
       return {
         color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor,
       }
@@ -61,7 +75,20 @@ export default {
   },
 
   methods: {
-    onClick (event) {
+    startButton_onClick (event) {
+      console.log('# start')
+      this.$emit('press', event)
+    },
+
+    pauseButton_onClick (event) {
+      this.$emit('press', event)
+    },
+
+    stopButton_onClick (event) {
+      this.$emit('press', event)
+    },
+
+    configButton_onClick (event) {
       this.$emit('press', event)
     },
   },
@@ -70,10 +97,31 @@ export default {
 
 <style lang="sass" scoped>
 .PomodoroButton
+  display: flex
+  align-items: center
+  flex-direction: column
+  justify-content: center
+  text-align: center
+
+.mainButton,
+.subButton
   background-color: transparent
   border-color: initial
   border-style: solid
   border-width: 1px
   box-sizing: border-box
+
+  &:disabled
+    border-color: transparent
+    color: #063 !important
+
+.mainButton
   font-size: 5rem
+  height: 70%
+  width: 100%
+
+.subButton
+  font-size: 3rem
+  height: 30%
+  width: 100%
 </style>

@@ -8,7 +8,8 @@
       div.leftBottom
         PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
-        p Lorem aperiam facere ipsam nemo necessitatibus Dolorem aliquam sint molestias expedita repellendus? Perspiciatis facere tempore dignissimos sed ipsum Dolorem totam magnam alias nulla obcaecati ea quam, dolor? Aliquid incidunt consectetur
+        a.pinCenter.preferencesLink(:style="{ color: $store.state.preferences.fgColor }" href="/preferences")
+          i.fas.fa-cog
 </template>
 
 <script>
@@ -174,5 +175,11 @@ export default {
 
 .pomodoroButton
   height: 100%
+  width: 100%
+
+.preferencesLink
+  font-size: 3rem
+  height: 100%
+  text-decoration: none
   width: 100%
 </style>

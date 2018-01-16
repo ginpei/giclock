@@ -12,18 +12,18 @@ import AnalogClockNeedle from './AnalogClockNeedle.vue'
 
 export default {
   components: {
-    AnalogClockNeedle
+    AnalogClockNeedle,
   },
 
   props: [
-    'now'
+    'now',
   ],
 
   data () {
     return {
       circleStrokeWidth: 1,
       height: 0,
-      width: 0
+      width: 0,
     }
   },
 
@@ -50,7 +50,7 @@ export default {
 
     secondProgress () {
       return this.now.getSeconds() / 60
-    }
+    },
   },
 
   updated () {
@@ -61,8 +61,8 @@ export default {
     updateLayout (el) {
       this.height = el.clientHeight
       this.width = el.clientWidth
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -10,16 +10,16 @@ import baseFontSize from '~/middleware/baseFontSize.js'
 export default {
   data () {
     return {
-      contentScale: 1
+      contentScale: 1,
     }
   },
 
   computed: {
     contentStyle () {
       return {
-        transform: `scale(${this.contentScale})`
+        transform: `scale(${this.contentScale})`,
       }
-    }
+    },
   },
 
   mounted () {
@@ -40,8 +40,8 @@ export default {
       const wScale = elContainer.clientWidth / elContent.clientWidth
       const hScale = elContainer.clientHeight / elContent.clientHeight
       this.contentScale = Math.min(wScale, hScale)
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -16,7 +16,7 @@ import { sHours, sMinutes, sSeconds } from '~/middleware/time.js'
 
 export default {
   props: [
-    'now'
+    'now',
   ],
 
   computed: {
@@ -46,8 +46,8 @@ export default {
 
     sYobi () {
       return 'Mon Tue Wed Thu Fri Sat Sun'.split(' ')[this.now.getDay()]
-    }
-  }
+    },
+  },
 }
 </script>
 

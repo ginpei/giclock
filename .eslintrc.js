@@ -11,6 +11,15 @@ module.exports = {
     'html'
   ],
   // add your custom rules here
-  rules: {},
-  globals: {}
+  rules: {
+    "brace-style": [
+      "error",
+      "stroustrup",
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline",
+    ],
+  },
+  globals: {},
 }

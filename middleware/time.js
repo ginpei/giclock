@@ -23,5 +23,5 @@ export {
   now,
   sHours,
   sMinutes,
-  sSeconds
+  sSeconds,
 }

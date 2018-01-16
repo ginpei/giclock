@@ -4,12 +4,8 @@
  * should be able to be contained inside document.
  */
 
-if (process.BROWSER_BUILD) {
-  console.log('# ok?')
-}
-
 const listeners = {
-  change: new Set()
+  change: new Set(),
 }
 
 function update () {
@@ -57,5 +53,5 @@ export default baseFontSize = {
   reset () {
     baseFontSize.deactivate()
     listeners.length = 0
-  }
+  },
 }

@@ -3,7 +3,7 @@ export const state = () => {
     length: 25 * 60 * 1000,
     baseRemainingTime: 0,
     startedAt: 0,
-    tmCallback: null
+    tmCallback: null,
   }
 }
 
@@ -25,7 +25,7 @@ export const getters = {
       const restTime = state.startedAt + state.length - now
       return restTime
     }
-  }
+  },
 }
 
 export const mutations = {
@@ -43,7 +43,7 @@ export const mutations = {
 
   setCallback (state, id) {
     state.tmCallback = id
-  }
+  },
 }
 
 export const actions = {
@@ -63,5 +63,5 @@ export const actions = {
     commit('setStartedAt', 0)
     clearTimeout(state.tmCallback)
     commit('setCallback', null)
-  }
+  },
 }

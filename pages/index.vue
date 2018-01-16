@@ -23,13 +23,13 @@ export default {
     AnalogClock,
     DigitalClock,
     FullfillView,
-    PomodoroButton
+    PomodoroButton,
   },
 
   data () {
     return {
       now: new Date(),
-      pomodoroStartedAt: 0
+      pomodoroStartedAt: 0,
     }
   },
 
@@ -37,7 +37,7 @@ export default {
     style () {
       return {
         backgroundColor: this.$store.state.preferences.bgColor,
-        color: this.$store.state.preferences.fgColor
+        color: this.$store.state.preferences.fgColor,
       }
     },
 
@@ -54,7 +54,7 @@ export default {
 
     pomodoroLength () {
       return this.$store.state.pomodoro.length
-    }
+    },
   },
 
   mounted () {
@@ -93,7 +93,8 @@ export default {
     askNotificationPermission () {
       if (Notification.permission === 'denied') {
         console.warn('Notification is not granted.')
-      } else if (Notification.permission !== 'granted') {
+      }
+      else if (Notification.permission !== 'granted') {
         Notification.requestPermission()
       }
     },
@@ -110,16 +111,17 @@ export default {
     onPress_pomodoro () {
       if (this.pomodoroWorking) {
         this.$store.dispatch('pomodoro/stop')
-      } else {
+      }
+      else {
         this.askNotificationPermission()
         this.$store.dispatch('pomodoro/start', {
           onComplete: () => {
             this.notify('Done!')
-          }
+          },
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

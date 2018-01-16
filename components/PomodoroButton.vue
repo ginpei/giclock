@@ -14,13 +14,13 @@ export default {
     'length',
     'now',
     'restTime',
-    'working'
+    'working',
   ],
 
   computed: {
     style () {
       return {
-        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor
+        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor,
       }
     },
 
@@ -57,14 +57,14 @@ export default {
 
       const sRestTime = `${restMinutes}m ${restSeconds}s`
       return sRestTime
-    }
+    },
   },
 
   methods: {
     onClick (event) {
       this.$emit('press', event)
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -9,7 +9,7 @@ export default {
     'length',
     'progress',
     'size',
-    'width'
+    'width',
   ],
 
   computed: {
@@ -23,7 +23,7 @@ export default {
 
     transform () {
       return `translate(${this.center}, ${this.center}) rotate(${this.rotate}, ${this.width / 2}, ${this.width / 2})`
-    }
-  }
+    },
+  },
 }
 </script>

@@ -3,8 +3,8 @@
     div.layoutBox.pinCenter
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel
-      div.pinCenter.topLine(ref="digitalClockContainer")
-        DigitalClock(:now="now" :style="digitalClockStyle" ref="digitalClock")
+      FullfillView.pinCenter.topLine(ref="digitalClockContainer")
+        DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
         PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
@@ -14,18 +14,20 @@
 <script>
 import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
+import FullfillView from '~/components/FullfillView.vue'
 import PomodoroButton from '~/components/PomodoroButton.vue'
+import baseFontSize from '~/middleware/baseFontSize.js'
 
 export default {
   components: {
     AnalogClock,
     DigitalClock,
+    FullfillView,
     PomodoroButton
   },
 
   data () {
     return {
-      digitalClockScale: 0,
       now: new Date(),
       pomodoroStartedAt: 0
     }
@@ -36,12 +38,6 @@ export default {
       return {
         backgroundColor: this.$store.state.preferences.bgColor,
         color: this.$store.state.preferences.fgColor
-      }
-    },
-
-    digitalClockStyle () {
-      return {
-        transform: `scale(${this.digitalClockScale})`
       }
     },
 
@@ -66,20 +62,22 @@ export default {
       this.now = new Date()
     }, 100)
 
+    baseFontSize.activate()
+
     this.f_updateLayout = () => this.updateLayout()
-    window.addEventListener('resize', this.f_updateLayout)
+    baseFontSize.on('change', this.f_updateLayout)
     this.f_updateLayout()
   },
 
   destroyed () {
+    baseFontSize.off('change', this.f_updateLayout)
+    baseFontSize.deactivate()
     clearInterval(this.tmTick)
-    window.removeEventListener('resize', this.f_updateLayout)
   },
 
   methods: {
     updateLayout () {
       this.updateRootFontSize()
-      this.updateDigitalClockScale()
     },
 
     updateRootFontSize () {
@@ -90,15 +88,6 @@ export default {
 
       // affects rem unit
       document.documentElement.style.fontSize = `${length / 50}px`
-    },
-
-    updateDigitalClockScale () {
-      const elClock = this.$refs.digitalClock.$el
-      const elContainer = this.$refs.digitalClockContainer
-
-      const wScale = elContainer.clientWidth / elClock.clientWidth
-      const hScale = elContainer.clientHeight / elClock.clientHeight
-      this.digitalClockScale = Math.min(wScale, hScale)
     },
 
     onPress_pomodoro () {

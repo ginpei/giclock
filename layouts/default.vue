@@ -49,17 +49,4 @@ html {
   color: #fff;
   background-color: #35495e;
 }
-
-
-@media (orientation: portrait) {
-  :root {
-    font-size: 1vh
-  }
-}
-
-@media (orientation: landscape) {
-  :root {
-    font-size: 1vw
-  }
-}
 </style>

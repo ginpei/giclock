@@ -44,7 +44,6 @@ export default {
       // 59.000 -> '0:59'
 
       const restTimeInSeconds = Math.ceil(this.restTime / 1000)
-      console.log('# this.restTime, restTimeInSeconds', this.restTime, restTimeInSeconds)
       if (isNaN(restTimeInSeconds)) {
         return ''
       }

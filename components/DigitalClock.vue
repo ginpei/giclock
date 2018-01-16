@@ -45,7 +45,7 @@ export default {
     },
 
     sYobi () {
-      return 'Mon Tue Wed Thu Fri Sat Sun'.split(' ')[this.now.getDay()]
+      return 'Sun Mon Tue Wed Thu Fri Sat'.split(' ')[this.now.getDay()]
     },
   },
 }

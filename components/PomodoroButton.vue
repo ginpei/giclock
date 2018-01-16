@@ -37,13 +37,20 @@ export default {
      * @returns {string}
      */
     sRestTime () {
-      const restTime = this.restTime
-      if (isNaN(restTime)) {
+      //  0     -> '0:00'
+      //  0.001 -> '0:01'
+      // 60.000 -> '1:00'
+      // 59.001 -> '1:00'
+      // 59.000 -> '0:59'
+
+      const restTimeInSeconds = Math.ceil(this.restTime / 1000)
+      console.log('# this.restTime, restTimeInSeconds', this.restTime, restTimeInSeconds)
+      if (isNaN(restTimeInSeconds)) {
         return ''
       }
 
-      let restSeconds = Math.floor(restTime / 1000) % 60
-      const restMinutes = Math.floor((restTime / 1000 - restSeconds) / 60)
+      let restSeconds = restTimeInSeconds % 60
+      const restMinutes = Math.floor((restTimeInSeconds - restSeconds) / 60)
 
       if (restMinutes < 0) {
         restSeconds = -restSeconds

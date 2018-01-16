@@ -90,11 +90,33 @@ export default {
       document.documentElement.style.fontSize = `${length / 50}px`
     },
 
+    askNotificationPermission () {
+      if (Notification.permission === 'denied') {
+        console.warn('Notification is not granted.')
+      } else if (Notification.permission !== 'granted') {
+        Notification.requestPermission()
+      }
+    },
+
+    notify (message) {
+      if (Notification.permission !== 'granted') {
+        console.warn(`Notification hasn't been granted for message "${message}"`)
+        return
+      }
+
+      const notification = new Notification(message) // eslint-disable-line no-unused-vars
+    },
+
     onPress_pomodoro () {
       if (this.pomodoroWorking) {
         this.$store.dispatch('pomodoro/stop')
       } else {
-        this.$store.dispatch('pomodoro/start')
+        this.askNotificationPermission()
+        this.$store.dispatch('pomodoro/start', {
+          onComplete: () => {
+            this.notify('Done!')
+          }
+        })
       }
     }
   }

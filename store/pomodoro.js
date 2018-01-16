@@ -1,8 +1,9 @@
 export const state = () => {
   return {
     length: 25 * 60 * 1000,
-    restTime: 0,
-    startedAt: 0
+    baseRemainingTime: 0,
+    startedAt: 0,
+    tmCallback: null
   }
 }
 
@@ -34,17 +35,33 @@ export const mutations = {
     }
 
     state.startedAt = startedAt
+  },
+
+  setBaseRemainingTime (state, baseRemainingTime) {
+    state.baseRemainingTime = baseRemainingTime
+  },
+
+  setCallback (state, id) {
+    state.tmCallback = id
   }
 }
 
 export const actions = {
-  start ({ commit }, { now: _now } = {}) {
+  start ({ state, commit }, { now: _now, onComplete } = {}) {
     const now = _now || Date.now()
-    const nowOnSec = now - now % 1000 // remove ms
+    const diff = now % 1000
+    const nowOnSec = now - diff // remove ms
     commit('setStartedAt', nowOnSec)
+
+    const baseRemainingTime = state.length - diff
+    commit('setBaseRemainingTime', baseRemainingTime)
+
+    commit('setCallback', setTimeout(onComplete, baseRemainingTime))
   },
 
-  stop ({ commit }) {
+  stop ({ state, commit }) {
     commit('setStartedAt', 0)
+    clearTimeout(state.tmCallback)
+    commit('setCallback', null)
   }
 }

@@ -8,7 +8,7 @@
       i.fa.fa-stop-circle
       |  Reset
     button.mainButton(v-show="!working" @click="startButton_onClick" :style="mainButtonStyle")
-      |  {{sLength}}
+      | {{sLength}}
       br
       i.fa.fa-play-circle
     button.subButton(v-show="!working" @click="configButton_onClick" :style="subButtonStyle")

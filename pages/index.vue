@@ -148,19 +148,9 @@ export default {
 .container
   min-height: 100vh
 
-  &,
-  & button
-    font-family: "Share Tech Mono", monospace
-
 .layoutBox
   height: 50rem
   width: 50rem
-
-.pinCenter
-  display: flex
-  justify-content: center
-  align-items: center
-  text-align: center
 
   @media (orientation: portrait)
     &

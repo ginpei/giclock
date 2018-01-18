@@ -97,23 +97,6 @@ export default {
 
 <style lang="sass" scoped>
 .PomodoroButton
-  display: flex
-  align-items: center
-  flex-direction: column
-  justify-content: center
-  text-align: center
-
-.mainButton,
-.subButton
-  background-color: transparent
-  border-color: initial
-  border-style: solid
-  border-width: 1px
-  box-sizing: border-box
-
-  &:disabled
-    border-color: transparent
-    color: #063 !important
 
 .mainButton
   font-size: 5rem

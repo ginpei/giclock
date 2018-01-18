@@ -59,7 +59,7 @@ export default {
 
       const restTimeInSeconds = Math.ceil(this.restTime / 1000)
       if (isNaN(restTimeInSeconds)) {
-        return ''
+        return '0m 0s'
       }
 
       let restSeconds = restTimeInSeconds % 60

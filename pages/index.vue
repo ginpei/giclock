@@ -10,6 +10,8 @@
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(:style="{ color: $store.state.preferences.fgColor }" href="/preferences")
           i.fas.fa-cog
+    div.sounds
+      audio(ref="chimeSound" src="/D0002011518_00000_A_001.m4a")
 </template>
 
 <script>
@@ -100,6 +102,19 @@ export default {
       }
     },
 
+    playChime () {
+      this.stopChime()
+
+      const el = this.$refs.chimeSound
+      el.play()
+    },
+
+    stopChime () {
+      const el = this.$refs.chimeSound
+      el.pause()
+      el.currentTime = 0
+    },
+
     notify (message) {
       if (Notification.permission !== 'granted') {
         console.warn(`Notification hasn't been granted for message "${message}"`)
@@ -111,12 +126,15 @@ export default {
 
     onPress_pomodoro () {
       if (this.pomodoroWorking) {
+        this.stopChime()
         this.$store.dispatch('pomodoro/stop')
       }
       else {
+        this.playChime()
         this.askNotificationPermission()
         this.$store.dispatch('pomodoro/start', {
           onComplete: () => {
+            this.playChime()
             this.notify('Done!')
           },
         })

@@ -28,13 +28,13 @@ export default {
   computed: {
     mainButtonStyle () {
       return {
-        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor,
+        color: this.exceeded ? '#f00' : null,
       }
     },
 
     subButtonStyle () {
       return {
-        color: this.exceeded ? '#f00' : this.$store.state.preferences.fgColor,
+        color: this.exceeded ? '#f00' : null,
       }
     },
 

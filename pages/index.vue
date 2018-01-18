@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.container.pinCenter(:style="style")
+  section.container.pinCenter
     div.layoutBox.pinCenter
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel
@@ -8,7 +8,7 @@
       div.leftBottom
         PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
-        a.pinCenter.preferencesLink(:style="{ color: $store.state.preferences.fgColor }" href="/preferences")
+        a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
     div.sounds
       audio(ref="chimeSound" src="/D0002011518_00000_A_001.m4a")
@@ -37,13 +37,6 @@ export default {
   },
 
   computed: {
-    style () {
-      return {
-        backgroundColor: this.$store.state.preferences.bgColor,
-        color: this.$store.state.preferences.fgColor,
-      }
-    },
-
     pomodoroWorking () {
       return this.$store.getters['pomodoro/working']
     },

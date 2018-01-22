@@ -5,7 +5,7 @@
 </template>
 
 <style lang="sass">
-\:root
+html
   --color-bg: #000
   --color-fg: #0f9
 

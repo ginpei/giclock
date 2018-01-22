@@ -1,20 +1,34 @@
 <template lang="pug">
-  section.container
-    h1 Preferences
-    p
-      a(href="/") ← Back
+  SettingLayout(title="Preferences")
 
-    p
-      | Chime sound is from:&nbsp;
-      a(href="https://www1.nhk.or.jp/archives/creative/material/view.html?m=D0002011518_00000") NHKクリエイティブ・ライブラリー
+    SettingTable(heading="Resources")
+      SettingColumn(title="Chime sound")
+        a(href="https://www1.nhk.or.jp/archives/creative/material/view.html?m=D0002011518_00000") NHKクリエイティブ・ライブラリー
+
+    SettingTable(heading="About")
+      SettingColumn(title="Author")
+        a(href="https://ginpei.info/") Ginpei Takanashi
+      SettingColumn(title="GitHub")
+        a(href="https://github.com/ginpei/giclock") ginpei/giclock
 </template>
 
 <script>
+import {
+  SettingColumn,
+  SettingInput,
+  SettingLayout,
+  SettingTable,
+} from '~/components/settings/index.js'
+
 export default {
+  components: {
+    SettingColumn,
+    SettingInput,
+    SettingLayout,
+    SettingTable,
+  },
 }
 </script>
 
 <style lang="sass" scoped>
-.container
-  margin: 3rem
 </style>

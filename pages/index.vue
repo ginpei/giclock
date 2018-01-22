@@ -117,20 +117,28 @@ export default {
       const notification = new Notification(message) // eslint-disable-line no-unused-vars
     },
 
+    startPomodoro () {
+      this.stopChime()
+      this.$store.dispatch('pomodoro/stop')
+    },
+
+    stopPomodoro () {
+      this.playChime()
+      this.askNotificationPermission()
+      this.$store.dispatch('pomodoro/start', {
+        onComplete: () => {
+          this.playChime()
+          this.notify('Done!')
+        },
+      })
+    },
+
     onPress_pomodoro () {
       if (this.pomodoroWorking) {
-        this.stopChime()
-        this.$store.dispatch('pomodoro/stop')
+        this.startPomodoro()
       }
       else {
-        this.playChime()
-        this.askNotificationPermission()
-        this.$store.dispatch('pomodoro/start', {
-          onComplete: () => {
-            this.playChime()
-            this.notify('Done!')
-          },
-        })
+        this.stopPomodoro()
       }
     },
   },

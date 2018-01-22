@@ -76,7 +76,6 @@ export default {
 
   methods: {
     startButton_onClick (event) {
-      console.log('# start')
       this.$emit('press', event)
     },
 

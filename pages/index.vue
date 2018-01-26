@@ -117,11 +117,6 @@ export default {
       const notification = new Notification(message) // eslint-disable-line no-unused-vars
     },
 
-    stopPomodoro () {
-      this.stopChime()
-      this.$store.dispatch('pomodoro/stop')
-    },
-
     startPomodoro () {
       this.playChime()
       this.askNotificationPermission()
@@ -131,6 +126,11 @@ export default {
           this.notify('Done!')
         },
       })
+    },
+
+    stopPomodoro () {
+      this.stopChime()
+      this.$store.dispatch('pomodoro/stop')
     },
 
     pomodoro_onStart () {

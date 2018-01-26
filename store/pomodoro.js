@@ -49,7 +49,31 @@ export const mutations = {
 }
 
 export const actions = {
-  start ({ state, getters, commit }, { now: _now, onComplete } = {}) {
+  load ({ commit, dispatch }) {
+    try {
+      const json = localStorage.getItem('giclock/pomodoro')
+      const { startedAt, baseRemainingTime } = JSON.parse(json)
+      const finishTime = startedAt + baseRemainingTime
+      console.log(startedAt, baseRemainingTime, new Date(finishTime))
+      if (startedAt && finishTime > Date.now()) {
+        const remainingTime = finishTime - Date.now()
+        commit('setBaseRemainingTime', remainingTime)
+        return { running: true }
+      }
+    }
+    catch (error) {
+      // just ignore
+    }
+    return { running: false }
+  },
+
+  save ({ commit }, { startedAt, baseRemainingTime }) {
+    const data = { startedAt, baseRemainingTime }
+    const json = JSON.stringify(data)
+    localStorage.setItem('giclock/pomodoro', json)
+  },
+
+  start ({ state, getters, commit, dispatch }, { now: _now, onComplete } = {}) {
     const now = _now || Date.now()
 
     // remove ms
@@ -57,13 +81,15 @@ export const actions = {
     const nowOnSec = now - diff
     commit('setStartedAt', nowOnSec)
 
+    const remainingTime = getters['getRemainingTime'](now)
     if (onComplete) {
-      const remainingTime = getters['getRemainingTime'](now)
       commit('setCallback', setTimeout(onComplete, remainingTime))
     }
+
+    dispatch('save', { startedAt: nowOnSec, baseRemainingTime: remainingTime })
   },
 
-  stop ({ state, getters, commit }, { now: _now } = {}) {
+  stop ({ state, getters, commit, dispatch }, { now: _now } = {}) {
     const now = _now || Date.now()
 
     // remember current status
@@ -78,6 +104,8 @@ export const actions = {
     commit('setStartedAt', 0)
     clearTimeout(state.tmCallback)
     commit('setCallback', null)
+
+    dispatch('save', { startedAt: 0, baseRemainingTime: 0 })
   },
 
   reset ({ commit }) {

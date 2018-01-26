@@ -61,6 +61,8 @@ export default {
     this.f_updateLayout = () => this.updateLayout()
     baseFontSize.on('change', this.f_updateLayout)
     this.f_updateLayout()
+
+    this.load()
   },
 
   destroyed () {
@@ -70,6 +72,14 @@ export default {
   },
 
   methods: {
+    async load () {
+      const { running } = await this.$store.dispatch('pomodoro/load')
+      console.log(`running? ${running}`)
+      if (running) {
+        this.startPomodoro({ silent: true })
+      }
+    },
+
     updateLayout () {
       this.updateRootFontSize()
     },
@@ -115,8 +125,10 @@ export default {
       const notification = new Notification(message) // eslint-disable-line no-unused-vars
     },
 
-    startPomodoro () {
-      this.playChime()
+    startPomodoro ({ silent } = {}) {
+      if (!silent) {
+        this.playChime()
+      }
       this.askNotificationPermission()
       this.$store.dispatch('pomodoro/start', {
         onComplete: () => {

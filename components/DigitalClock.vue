@@ -55,10 +55,10 @@ export default {
 .DigitalClock
 
 .time
-  font-size: 50px
+  font-size: 10rem
 
 .date
-  font-size: 20px
+  font-size: 4rem
 
 .yobi
   font-size: smaller

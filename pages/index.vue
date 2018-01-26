@@ -3,7 +3,7 @@
     div.layoutBox.pinCenter
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel
-      FullfillView.pinCenter.topLine(ref="digitalClockContainer")
+      div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
         PomodoroButton.pomodoroButton(@start="pomodoro_onStart" @pause="pomodoro_onPause" @reset="pomodoro_onReset" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
@@ -17,7 +17,6 @@
 <script>
 import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
-import FullfillView from '~/components/FullfillView.vue'
 import PomodoroButton from '~/components/PomodoroButton.vue'
 import baseFontSize from '~/middleware/baseFontSize.js'
 
@@ -25,7 +24,6 @@ export default {
   components: {
     AnalogClock,
     DigitalClock,
-    FullfillView,
     PomodoroButton,
   },
 

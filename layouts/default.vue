@@ -8,6 +8,7 @@
 html
   --color-bg: #000
   --color-fg: #0f9
+  --color-fg-disabled: #063
 
 body
   background-color: var(--color-bg)
@@ -36,7 +37,7 @@ button
 
   &:disabled
     border-color: transparent
-    color: #063 !important
+    color: var(--color-fg-disabled)
 
 .pinCenter
   align-items: center

@@ -4,7 +4,7 @@
       | {{sRestTime}}
       br
       i.fa.fa-pause-circle
-    button.subButton(v-show="working" @click="stopButton_onClick" :style="subButtonStyle" disabled)
+    button.subButton(v-show="working" @click="resetButton_onClick" :style="subButtonStyle" disabled)
       i.fa.fa-stop-circle
       |  Reset
     button.mainButton(v-show="paused" @click="startButton_onClick" :style="mainButtonStyle")
@@ -18,7 +18,7 @@
       | {{sLength}}
       br
       i.fa.fa-play-circle
-    button.subButton(v-show="stopped" @click="configButton_onClick" :style="subButtonStyle")
+    button.subButton(v-show="stopped" @click="configButton_onClick" :style="subButtonStyle" disabled)
       i.fa.fa-stopwatch
       |  Set time
 </template>
@@ -91,23 +91,19 @@ export default {
 
   methods: {
     startButton_onClick (event) {
-      this.$emit('press', event)
+      this.$emit('start', event)
     },
 
     pauseButton_onClick (event) {
-      this.$emit('press', event)
+      this.$emit('pause', event)
     },
 
     resetButton_onClick (event) {
       this.$emit('reset', event)
     },
 
-    stopButton_onClick (event) {
-      this.$emit('press', event)
-    },
-
     configButton_onClick (event) {
-      this.$emit('press', event)
+      this.$emit('config', event)
     },
   },
 }

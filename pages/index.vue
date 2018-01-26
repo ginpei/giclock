@@ -6,7 +6,7 @@
       FullfillView.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
-        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" @reset="pomodoro_onReset" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
+        PomodoroButton.pomodoroButton(@start="pomodoro_onStart" @pause="pomodoro_onPause" @reset="pomodoro_onReset" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
@@ -117,12 +117,12 @@ export default {
       const notification = new Notification(message) // eslint-disable-line no-unused-vars
     },
 
-    startPomodoro () {
+    stopPomodoro () {
       this.stopChime()
       this.$store.dispatch('pomodoro/stop')
     },
 
-    stopPomodoro () {
+    startPomodoro () {
       this.playChime()
       this.askNotificationPermission()
       this.$store.dispatch('pomodoro/start', {
@@ -133,17 +133,16 @@ export default {
       })
     },
 
-    pomodoro_onReset () {
-      this.$store.dispatch('pomodoro/reset')
+    pomodoro_onStart () {
+      this.startPomodoro()
     },
 
-    onPress_pomodoro () {
-      if (this.pomodoroWorking) {
-        this.startPomodoro()
-      }
-      else {
-        this.stopPomodoro()
-      }
+    pomodoro_onPause () {
+      this.stopPomodoro()
+    },
+
+    pomodoro_onReset () {
+      this.$store.dispatch('pomodoro/reset')
     },
   },
 }

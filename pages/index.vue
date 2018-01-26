@@ -152,10 +152,6 @@ export default {
 .container
   min-height: 100vh
 
-.layoutBox
-  height: 50rem
-  width: 50rem
-
   @media (orientation: portrait)
     &
       flex-direction: column
@@ -163,6 +159,10 @@ export default {
   @media (orientation: landscape)
     &
       flex-direction: row
+
+.layoutBox
+  height: 50rem
+  width: 50rem
 
 .analogClock
   height: 100%

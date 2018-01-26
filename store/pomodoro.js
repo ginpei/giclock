@@ -20,7 +20,7 @@ export const getters = {
       }
 
       if (state.startedAt === 0) {
-        return NaN
+        return state.baseRemainingTime
       }
 
       const finishTime = state.startedAt + (state.baseRemainingTime || state.length)
@@ -77,6 +77,12 @@ export const actions = {
 
     commit('setStartedAt', 0)
     clearTimeout(state.tmCallback)
+    commit('setCallback', null)
+  },
+
+  reset ({ commit }) {
+    commit('setBaseRemainingTime', 0)
+    commit('setStartedAt', 0)
     commit('setCallback', null)
   },
 }

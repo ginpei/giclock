@@ -6,7 +6,7 @@
       FullfillView.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
-        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
+        PomodoroButton.pomodoroButton(@press="onPress_pomodoro" @reset="pomodoro_onReset" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
@@ -131,6 +131,10 @@ export default {
           this.notify('Done!')
         },
       })
+    },
+
+    pomodoro_onReset () {
+      this.$store.dispatch('pomodoro/reset')
     },
 
     onPress_pomodoro () {

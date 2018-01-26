@@ -45,7 +45,7 @@ export default {
      * @returns {number} Rest time in ms.
      */
     pomodoroRestTime () {
-      return this.$store.getters['pomodoro/getRestTime'](this.now.getTime())
+      return this.$store.getters['pomodoro/getRemainingTime'](this.now.getTime())
     },
 
     pomodoroLength () {

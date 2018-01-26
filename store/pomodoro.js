@@ -12,9 +12,10 @@ export const getters = {
     return state.startedAt !== 0
   },
 
-  getRestTime (state) {
+  getRemainingTime (state) {
     return (now) => {
       if (typeof now !== 'number' || isNaN(now)) {
+        console.error(`getRemainingTime: ${now}`)
         throw new Error('Current time must be set as a number')
       }
 
@@ -22,8 +23,9 @@ export const getters = {
         return NaN
       }
 
-      const restTime = state.startedAt + state.length - now
-      return restTime
+      const finishTime = state.startedAt + (state.baseRemainingTime || state.length)
+      const remainingTime = finishTime - now
+      return remainingTime
     }
   },
 }
@@ -47,19 +49,32 @@ export const mutations = {
 }
 
 export const actions = {
-  start ({ state, commit }, { now: _now, onComplete } = {}) {
+  start ({ state, getters, commit }, { now: _now, onComplete } = {}) {
     const now = _now || Date.now()
+
+    // remove ms
     const diff = now % 1000
-    const nowOnSec = now - diff // remove ms
+    const nowOnSec = now - diff
     commit('setStartedAt', nowOnSec)
 
-    const baseRemainingTime = state.length - diff
-    commit('setBaseRemainingTime', baseRemainingTime)
-
-    commit('setCallback', setTimeout(onComplete, baseRemainingTime))
+    if (onComplete) {
+      const remainingTime = getters['getRemainingTime'](now)
+      commit('setCallback', setTimeout(onComplete, remainingTime))
+    }
   },
 
-  stop ({ state, commit }) {
+  stop ({ state, getters, commit }, { now: _now } = {}) {
+    const now = _now || Date.now()
+
+    // remember current status
+    const remainingTime = getters['getRemainingTime'](now)
+    if (remainingTime > 0) {
+      commit('setBaseRemainingTime', remainingTime)
+    }
+    else {
+      commit('setBaseRemainingTime', 0)
+    }
+
     commit('setStartedAt', 0)
     clearTimeout(state.tmCallback)
     commit('setCallback', null)

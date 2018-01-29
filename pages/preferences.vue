@@ -1,6 +1,17 @@
 <template lang="pug">
   SettingLayout(title="Preferences")
 
+    SettingTable(heading="Timer")
+      SettingColumn(title="Length")
+        input.SettingLayout-input(:value="$store.state.preferences.length" disabled)
+
+    SettingTable(heading="Visual")
+      SettingColumn(title="Rotation")
+        select.SettingLayout-input(:value="$store.state.preferences.rotation" disabled)
+          option(value="none") None
+          option(value="right") Right
+          option(value="left") Left
+
     SettingTable(heading="Resources")
       SettingColumn(title="Chime sound")
         a(href="https://www1.nhk.or.jp/archives/creative/material/view.html?m=D0002011518_00000") NHKクリエイティブ・ライブラリー
@@ -15,7 +26,6 @@
 <script>
 import {
   SettingColumn,
-  SettingInput,
   SettingLayout,
   SettingTable,
 } from '~/components/settings/index.js'
@@ -23,7 +33,6 @@ import {
 export default {
   components: {
     SettingColumn,
-    SettingInput,
     SettingLayout,
     SettingTable,
   },

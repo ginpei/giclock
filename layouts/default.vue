@@ -21,23 +21,38 @@ button
   font-family: "Share Tech Mono", monospace
 
 a,
-button
+button,
+input,
+select
+  background-color: transparent
+  border-color: initial
+  border-width: 1px
   color: var(--color-fg)
 
-  &:active
+button
+  border-style: solid
+  box-sizing: border-box
+
+input,
+select
+  border-style: none none solid
+
+a,
+button,
+input,
+select
+  &:active,
+  &.active
     background-color: var(--color-fg)
     color: var(--color-bg)
 
-button
-  background-color: transparent
-  border-color: initial
-  border-style: solid
-  border-width: 1px
-  box-sizing: border-box
-
-  &:disabled
+  &:disabled,
+  &.disabled
     border-color: transparent
     color: var(--color-fg-disabled)
+
+option
+  background-color: var(--color-bg)
 
 .pinCenter
   align-items: center

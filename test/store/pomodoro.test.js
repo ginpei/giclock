@@ -41,13 +41,32 @@ describe('pomodoro', () => {
         getters = {
           getRemainingTime: sinon.mock(),
         }
-        actions.start({ state, getters, commit, dispatch })
       })
 
-      it('sets start time', () => {
-        const args = commit.getCall(0).args
-        expect(args[0]).to.eql('setStartedAt')
-        expect(args[1]).to.eql(new Date('2000/01/01 00:00:00').getTime())
+      describe('with length 12m', () => {
+        beforeEach(() => {
+          actions.start({ state, getters, commit, dispatch }, { length: s2tl('12m') })
+        })
+
+        it('sets start time', () => {
+          const args = commit.getCall(0).args
+          expect(args[0]).to.eql('setStartedAt')
+          expect(args[1]).to.eql(new Date('2000/01/01 00:00:00').getTime())
+        })
+
+        it('sets length', () => {
+          const args = commit.getCall(1).args
+          expect(args[0]).to.eql('setLength')
+          expect(args[1]).to.eql(s2tl('12m'))
+        })
+      })
+
+      describe('without length', () => {
+        it('throws an error', () => {
+          expect(() => {
+            actions.start({ state, getters, commit, dispatch })
+          }).to.throw()
+        })
       })
     })
 

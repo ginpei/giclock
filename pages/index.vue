@@ -149,7 +149,14 @@ export default {
         this.playChime()
       }
       this.askNotificationPermission()
+
+      const sLength = this.$store.state.preferences.length
+      if (!sLength.match(/^\d+m$/)) {
+        throw new Error('Invalid time length')
+      }
+      const length = parseInt(sLength) * 60 * 1000
       this.$store.dispatch('pomodoro/start', {
+        length,
         onComplete: () => {
           this.playChime()
           this.notify('Done!')

@@ -1,6 +1,6 @@
 export const state = () => {
   return {
-    length: 25 * 60 * 1000,
+    length: 0,
     baseRemainingTime: 0,
     startedAt: 0,
     tmCallback: null,
@@ -39,6 +39,10 @@ export const mutations = {
     state.startedAt = startedAt
   },
 
+  setLength (state, length) {
+    state.length = length
+  },
+
   setBaseRemainingTime (state, baseRemainingTime) {
     state.baseRemainingTime = baseRemainingTime
   },
@@ -73,13 +77,18 @@ export const actions = {
     localStorage.setItem('giclock/pomodoro', json)
   },
 
-  start ({ state, getters, commit, dispatch }, { now: _now, onComplete } = {}) {
+  start ({ state, getters, commit, dispatch }, { now: _now, length, onComplete } = {}) {
+    if (!length || typeof length !== 'number') {
+      throw new Error('Length as number is required')
+    }
+
     const now = _now || Date.now()
 
     // remove ms
     const diff = now % 1000
     const nowOnSec = now - diff
     commit('setStartedAt', nowOnSec)
+    commit('setLength', length)
 
     const remainingTime = getters['getRemainingTime'](now)
     if (onComplete) {

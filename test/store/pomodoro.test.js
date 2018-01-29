@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import sinon from "sinon";
+import sinon from 'sinon'
 import { actions, getters } from '../../store/pomodoro.js'
 
 // string to timestamp length
@@ -8,7 +8,8 @@ function s2tl (str) {
   // 123m
   if (str.match(/^\d+m$/)) {
     return parseInt(str) * 60 * 1000
-  } else {
+  }
+  else {
     console.error(`s2tl: ${str}`)
     throw new Error('Unsupported format')
   }
@@ -44,14 +45,13 @@ describe('pomodoro', () => {
       })
     })
 
-
     describe('stop', () => {
       let getters
 
       beforeEach(() => {
         clock.tick(s2tl('15m'))
         getters = {
-          getRemainingTime: sinon.mock()
+          getRemainingTime: sinon.mock(),
         }
       })
 

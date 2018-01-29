@@ -92,7 +92,10 @@ export default {
     },
 
     length_onChange (event) {
-      if (!this.length.match(/^\d+m$/)) {
+      if (this.length.match(/^\d+$/)) {
+        this.length = `${this.length}m`
+      }
+      else if (!this.length.match(/^\d+m$/)) {
         this.length = this.$store.state.preferences.length
       }
     },

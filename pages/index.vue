@@ -1,8 +1,8 @@
 <template lang="pug">
   section.container.pinCenter
-    div.layoutBox.pinCenter
+    div.layoutBox.pinCenter(:style="layoutBoxStyle")
       AnalogClock.analogClock(:now="now")
-    div.layoutBox.multiPanel
+    div.layoutBox.multiPanel(:style="layoutBoxStyle")
       div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
@@ -29,8 +29,10 @@ export default {
 
   data () {
     return {
+      length: '',
       now: new Date(),
       pomodoroStartedAt: 0,
+      rotation: '',
     }
   },
 
@@ -48,6 +50,14 @@ export default {
 
     pomodoroLength () {
       return this.$store.state.pomodoro.length
+    },
+
+    layoutBoxStyle () {
+      const rotationKey = this.$store.state.preferences.rotation
+      const rotation = rotationKey === 'right' ? '90deg' : rotationKey === 'left' ? '-90deg' : '0deg'
+      const transform = `rotate(${rotation})`
+
+      return { transform }
     },
   },
 
@@ -73,11 +83,18 @@ export default {
 
   methods: {
     async load () {
+      await this.loadPreferences()
       const { running } = await this.$store.dispatch('pomodoro/load')
       console.log(`running? ${running}`)
       if (running) {
         this.startPomodoro({ silent: true })
       }
+    },
+
+    loadPreferences () {
+      this.$store.dispatch('preferences/load')
+      this.length = this.$store.state.preferences.length
+      this.rotation = this.$store.state.preferences.rotation
     },
 
     updateLayout () {

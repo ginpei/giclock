@@ -56,7 +56,7 @@ export default {
 
     layoutBoxStyle () {
       const rotationKey = this.$store.state.preferences.rotation
-      const rotation = rotationKey === 'right' ? '90deg' : rotationKey === 'left' ? '-90deg' : '0deg'
+      const rotation = rotationKey === 'right' ? '-90deg' : rotationKey === 'left' ? '90deg' : '0deg'
       const transform = `rotate(${rotation})`
 
       return { transform }

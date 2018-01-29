@@ -17,7 +17,7 @@ function s2tl (str) {
 
 describe('pomodoro', () => {
   const now = new Date('2000/01/01 00:00:00').getTime()
-  let clock, state, commit
+  let clock, state, commit, dispatch
 
   beforeEach(() => {
     clock = sinon.useFakeTimers({ now })
@@ -26,6 +26,7 @@ describe('pomodoro', () => {
       startedAt: now,
     }
     commit = sinon.spy()
+    dispatch = sinon.spy()
   })
 
   afterEach(() => {
@@ -34,8 +35,13 @@ describe('pomodoro', () => {
 
   describe('actions', () => {
     describe('start', () => {
+      let getters
+
       beforeEach(() => {
-        actions.start({ state, commit })
+        getters = {
+          getRemainingTime: sinon.mock(),
+        }
+        actions.start({ state, getters, commit, dispatch })
       })
 
       it('sets start time', () => {
@@ -58,7 +64,7 @@ describe('pomodoro', () => {
       describe('before finishing', () => {
         beforeEach(() => {
           getters.getRemainingTime.returns(s2tl('10m'))
-          actions.stop({ state, getters, commit })
+          actions.stop({ state, getters, commit, dispatch })
         })
 
         it('sets remaining time', () => {
@@ -78,12 +84,17 @@ describe('pomodoro', () => {
           expect(args[0]).to.eql('setCallback')
           expect(args[1]).to.eql(null)
         })
+
+        it('saves', () => {
+          const args = dispatch.getCall(0).args
+          expect(args[0]).to.eql('save')
+        })
       })
 
       describe('when finish', () => {
         beforeEach(() => {
           getters.getRemainingTime.returns(0)
-          actions.stop({ state, getters, commit })
+          actions.stop({ state, getters, commit, dispatch })
         })
 
         it('resets remaining time', () => {
@@ -96,7 +107,7 @@ describe('pomodoro', () => {
       describe('after finishing', () => {
         beforeEach(() => {
           getters.getRemainingTime.returns(-999)
-          actions.stop({ state, getters, commit })
+          actions.stop({ state, getters, commit, dispatch })
         })
 
         it('resets remaining time', () => {

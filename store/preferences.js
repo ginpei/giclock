@@ -17,13 +17,14 @@ export const mutations = {
     state.rotation = rotation
   },
 
-  loaded (state) {
-    state.loaded = true
+  setLoaded (state, loaded) {
+    state.loaded = loaded
   },
 }
 
 export const actions = {
   load ({ commit, dispatch }) {
+    commit('setLoaded', false)
     try {
       const json = localStorage.getItem('giclock/preferences')
       const { length, rotation } = JSON.parse(json)
@@ -34,7 +35,7 @@ export const actions = {
       // just ignore
     }
 
-    commit('loaded')
+    commit('setLoaded', true)
   },
 
   save ({ state, commit }, { length, rotation }) {
@@ -44,5 +45,13 @@ export const actions = {
     const data = { length, rotation }
     const json = JSON.stringify(data)
     localStorage.setItem('giclock/preferences', json)
+  },
+
+  reset ({ commit, dispatch }) {
+    const data = {
+      length: '25m',
+      rotation: 'none',
+    }
+    dispatch('save', data)
   },
 }

@@ -18,7 +18,7 @@
       | {{sLength}}
       br
       i.fa.fa-play-circle
-    button.subButton(v-show="stopped" @click="configButton_onClick" :style="subButtonStyle" disabled)
+    button.subButton(v-show="stopped" @click="configButton_onClick" :style="subButtonStyle")
       i.fa.fa-stopwatch
       |  Set time
 </template>

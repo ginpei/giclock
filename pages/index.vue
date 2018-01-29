@@ -6,7 +6,7 @@
       div.pinCenter.topLine(ref="digitalClockContainer")
         DigitalClock(:now="now" ref="digitalClock")
       div.leftBottom
-        PomodoroButton.pomodoroButton(@start="pomodoro_onStart" @pause="pomodoro_onPause" @reset="pomodoro_onReset" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
+        PomodoroButton.pomodoroButton(@start="pomodoro_onStart" @pause="pomodoro_onPause" @reset="pomodoro_onReset" @config="pomodoro_onConfig" :working="pomodoroWorking" :now="now" :restTime="pomodoroRestTime" :length="pomodoroLength")
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
@@ -144,17 +144,19 @@ export default {
       const notification = new Notification(message) // eslint-disable-line no-unused-vars
     },
 
-    startPomodoro ({ silent } = {}) {
+    startPomodoro ({ sLength: _sLength, silent } = {}) {
+      const sLength = _sLength || this.$store.state.preferences.length
+
       if (!silent) {
         this.playChime()
       }
       this.askNotificationPermission()
 
-      const sLength = this.$store.state.preferences.length
-      if (!sLength.match(/^\d+m$/)) {
+      if (!sLength.match(/^\d+m?$/)) {
         throw new Error('Invalid time length')
       }
       const length = parseInt(sLength) * 60 * 1000
+      console.log(sLength, length)
       this.$store.dispatch('pomodoro/start', {
         length,
         onComplete: () => {
@@ -179,6 +181,13 @@ export default {
 
     pomodoro_onReset () {
       this.$store.dispatch('pomodoro/reset')
+    },
+
+    pomodoro_onConfig () {
+      const sLength = prompt('How long? (minutes)', this.$store.state.preferences.length)
+      if (sLength.match(/^\d+m?$/)) {
+        this.startPomodoro({ sLength })
+      }
     },
   },
 }

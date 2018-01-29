@@ -1,5 +1,7 @@
 # giclock
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ginpei/giclock.svg)](https://greenkeeper.io/)
+
 > Clock
 
 ## Build Setup

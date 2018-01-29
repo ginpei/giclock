@@ -49,7 +49,9 @@ export default {
     },
 
     pomodoroLength () {
-      return this.$store.state.pomodoro.length
+      const min = parseInt(this.length)
+      const pomodoroLength = min * 60 * 1000
+      return pomodoroLength
     },
 
     layoutBoxStyle () {

@@ -1,5 +1,6 @@
 # giclock
 
+[![Build Status](https://travis-ci.org/ginpei/giclock.svg?branch=master)](https://travis-ci.org/ginpei/giclock)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ginpei/giclock.svg)](https://greenkeeper.io/)
 
 > Clock

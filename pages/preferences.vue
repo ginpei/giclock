@@ -1,13 +1,13 @@
 <template lang="pug">
-  SettingLayout(title="Preferences")
+  SettingLayout(@change="onChange" :style="style" title="Preferences")
 
     SettingTable(heading="Timer")
       SettingColumn(title="Length")
-        input.SettingLayout-input(:value="$store.state.preferences.length" disabled)
+        input.SettingLayout-input(v-model="length" @change="length_onChange")
 
     SettingTable(heading="Visual")
       SettingColumn(title="Rotation")
-        select.SettingLayout-input(:value="$store.state.preferences.rotation" disabled)
+        select.SettingLayout-input(v-model="rotation")
           option(value="none") None
           option(value="right") Right
           option(value="left") Left
@@ -35,6 +35,43 @@ export default {
     SettingColumn,
     SettingLayout,
     SettingTable,
+  },
+
+  data () {
+    return {
+      length: this.$store.state.preferences.length,
+      rotation: this.$store.state.preferences.rotation,
+    }
+  },
+
+  computed: {
+    style () {
+      return {
+        display: this.$store.state.preferences.loaded ? 'block' : 'none',
+      }
+    },
+  },
+
+  async mounted () {
+    await this.$store.dispatch('preferences/load')
+    this.length = this.$store.state.preferences.length
+    this.rotation = this.$store.state.preferences.rotation
+  },
+
+  methods: {
+    onChange (event) {
+      const data = {
+        length: this.length,
+        rotation: this.rotation,
+      }
+      this.$store.dispatch('preferences/save', data)
+    },
+
+    length_onChange (event) {
+      if (!this.length.match(/^\d+m$/)) {
+        this.length = this.$store.state.preferences.length
+      }
+    },
   },
 }
 </script>

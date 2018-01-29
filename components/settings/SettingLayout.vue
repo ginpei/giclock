@@ -1,5 +1,5 @@
 <template lang="pug">
-  article.SettingLayout
+  article.SettingLayout(@change="onChange" @input="onInput")
     header.SettingLayout-header
       div.SettingLayout-header-inner
         router-link.SettingLayout-back(to="/")
@@ -16,6 +16,16 @@
     props: [
       'title',
     ],
+
+    methods: {
+      onChange (event) {
+        this.$emit('change', event)
+      },
+
+      onInput (event) {
+        this.$emit('input', event)
+      },
+    },
   }
 </script>
 

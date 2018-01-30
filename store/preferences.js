@@ -13,12 +13,12 @@ export const mutations = {
     state.length = length
   },
 
-  setRotation (state, rotation) {
-    state.rotation = rotation
-  },
-
   setLoaded (state, loaded) {
     state.loaded = loaded
+  },
+
+  setRotation (state, rotation) {
+    state.rotation = rotation
   },
 }
 

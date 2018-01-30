@@ -11,7 +11,7 @@
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
     div.sounds
-      audio(ref="chimeSound" src="/D0002011518_00000_A_001.m4a")
+      audio(:src="soundUrl" ref="chimeSound")
 </template>
 
 <script>
@@ -19,7 +19,7 @@ import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
 import PomodoroButton from '~/components/PomodoroButton.vue'
 import baseFontSize from '~/middleware/baseFontSize.js'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -66,6 +66,11 @@ export default {
     ...mapState('preferences', [
       'notifyWhenFinish',
       'ringWhenStart',
+      'soundName',
+    ]),
+
+    ...mapGetters('preferences', [
+      'soundUrl',
     ]),
   },
 

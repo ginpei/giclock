@@ -5,7 +5,7 @@
       SettingColumn(title="Length")
         input.SettingLayout-input(v-model="length" @change="length_onChange")
       SettingColumn(title="Sound")
-        select.SettingLayout-input(v-model="soundName" disabled)
+        select.SettingLayout-input(v-model="soundName")
           option(value="schoolChime") School Chime
           option(value="none") None
       SettingColumn(title="Ring when start")

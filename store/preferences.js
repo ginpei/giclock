@@ -7,8 +7,24 @@ export const state = () => {
     notifyWhenFinish: true,
     ringWhenStart: true,
     rotation: 'none',
-    soundName: 'chime',
+    soundName: 'schoolChime',
   }
+}
+
+export const getters = {
+  soundUrl (state) {
+    switch (state.soundName) {
+      case 'schoolChime':
+        return '/D0002011518_00000_A_001.m4a'
+
+      case 'none':
+        return '' // setting empty for sound's src is OK?
+
+      default:
+        console.error('store/preferences:getters:soundURL', state.soundName)
+        throw new Error('Unknown sound name')
+    }
+  },
 }
 
 export const mutations = {

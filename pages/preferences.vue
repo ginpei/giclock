@@ -4,6 +4,18 @@
     SettingTable(heading="Timer")
       SettingColumn(title="Length")
         input.SettingLayout-input(v-model="length" @change="length_onChange")
+      SettingColumn(title="Sound")
+        select.SettingLayout-input(v-model="soundName" disabled)
+          option(value="schoolChime") School Chime
+          option(value="none") None
+      SettingColumn(title="Ring when start")
+        label.SettingLayout-input.disabled
+          input(v-model="ringWhenStart" type="checkbox" disabled)
+          | Ring
+      SettingColumn(title="Notify when finish")
+        label.SettingLayout-input.disabled
+          input(v-model="notifyWhenFinish" type="checkbox" disabled)
+          | Notify besides ringing
 
     SettingTable(heading="Visual")
       SettingColumn(title="Rotation")
@@ -45,10 +57,16 @@ export default {
 
   data () {
     return {
-      length: this.$store.state.preferences.length,
-      rotation: this.$store.state.preferences.rotation,
-      pastLength: this.$store.state.preferences.length,
-      pastRotation: this.$store.state.preferences.rotation,
+      length: '',
+      notifyWhenFinish: false,
+      ringWhenStart: false,
+      rotation: '',
+      pastLength: '',
+      pastNotifyWhenFinish: false,
+      pastRingWhenStart: false,
+      pastRotation: '',
+      pastSoundName: '',
+      soundName: '',
     }
   },
 
@@ -69,7 +87,10 @@ export default {
       const data = {
         initialized: false,
         length: this.length,
+        notifyWhenFinish: this.notifyWhenFinish,
+        ringWhenStart: this.ringWhenStart,
         rotation: this.rotation,
+        soundName: this.soundName,
       }
       this.$store.dispatch('preferences/save', data)
     },
@@ -77,11 +98,17 @@ export default {
     load () {
       this.$store.dispatch('preferences/load')
       this.length = this.$store.state.preferences.length
+      this.notifyWhenFinish = this.$store.state.preferences.notifyWhenFinish
+      this.ringWhenStart = this.$store.state.preferences.ringWhenStart
       this.rotation = this.$store.state.preferences.rotation
+      this.soundName = this.$store.state.preferences.soundName
 
       if (!this.initialized) {
         this.pastLength = this.$store.state.preferences.length
+        this.pastNotifyWhenFinish = this.$store.state.preferences.notifyWhenFinish
+        this.pastRingWhenStart = this.$store.state.preferences.ringWhenStart
         this.pastRotation = this.$store.state.preferences.rotation
+        this.pastSoundName = this.$store.state.preferences.soundName
       }
 
       this.initialized = true
@@ -102,7 +129,10 @@ export default {
 
     revert_onClick (event) {
       this.length = this.pastLength
+      this.notifyWhenFinish = this.pastNotifyWhenFinish
       this.rotation = this.pastRotation
+      this.ringWhenStart = this.pastRingWhenStart
+      this.soundName = this.pastSoundName
       this.save()
     },
 

@@ -21,6 +21,7 @@ button
   font-family: "Share Tech Mono", monospace
 
 a,
+label,
 button,
 input,
 select
@@ -34,12 +35,14 @@ button
   box-sizing: border-box
   padding: .5rem 1rem
 
+label,
 input,
 select
   border-style: none none solid
   padding: .5rem 0
 
 a,
+label,
 button,
 input,
 select

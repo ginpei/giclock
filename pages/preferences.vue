@@ -9,8 +9,8 @@
           option(value="schoolChime") School Chime
           option(value="none") None
       SettingColumn(title="Ring when start")
-        label.SettingLayout-input.disabled
-          input(v-model="ringWhenStart" type="checkbox" disabled)
+        label.SettingLayout-input
+          input(v-model="ringWhenStart" type="checkbox")
           | Ring
       SettingColumn(title="Notify when finish")
         label.SettingLayout-input

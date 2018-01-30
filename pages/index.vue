@@ -65,6 +65,7 @@ export default {
 
     ...mapState('preferences', [
       'notifyWhenFinish',
+      'ringWhenStart',
     ]),
   },
 
@@ -152,7 +153,7 @@ export default {
     startPomodoro ({ sLength: _sLength, silent } = {}) {
       const sLength = _sLength || this.$store.state.preferences.length
 
-      if (!silent) {
+      if (this.ringWhenStart && !silent) {
         this.playChime()
       }
 

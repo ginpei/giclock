@@ -13,8 +13,8 @@
           input(v-model="ringWhenStart" type="checkbox" disabled)
           | Ring
       SettingColumn(title="Notify when finish")
-        label.SettingLayout-input.disabled
-          input(v-model="notifyWhenFinish" type="checkbox" disabled)
+        label.SettingLayout-input
+          input(v-model="notifyWhenFinish" type="checkbox")
           | Notify besides ringing
 
     SettingTable(heading="Visual")

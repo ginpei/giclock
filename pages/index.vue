@@ -19,6 +19,7 @@ import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
 import PomodoroButton from '~/components/PomodoroButton.vue'
 import baseFontSize from '~/middleware/baseFontSize.js'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -61,6 +62,10 @@ export default {
 
       return { transform }
     },
+
+    ...mapState('preferences', [
+      'notifyWhenFinish',
+    ]),
   },
 
   mounted () {
@@ -150,7 +155,10 @@ export default {
       if (!silent) {
         this.playChime()
       }
-      this.askNotificationPermission()
+
+      if (this.notifyWhenFinish) {
+        this.askNotificationPermission()
+      }
 
       if (!sLength.match(/^\d+m?$/)) {
         throw new Error('Invalid time length')
@@ -161,7 +169,9 @@ export default {
         length,
         onComplete: () => {
           this.playChime()
-          this.notify('Done!')
+          if (this.notifyWhenFinish) {
+            this.notify('Done!')
+          }
         },
       })
     },

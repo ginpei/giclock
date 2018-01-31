@@ -3,7 +3,8 @@
     button.mainButton(v-show="working" @click="pauseButton_onClick" :style="mainButtonStyle")
       | {{sRestTime}}
       br
-      i.fa.fa-pause-circle
+      i.fa.fa-pause-circle(v-show="!exceeded")
+      i.fa.fa-stop-circle(v-show="exceeded")
     button.subButton(v-show="working" @click="resetButton_onClick" disabled)
       i.fa.fa-stop-circle
       |  Reset

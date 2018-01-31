@@ -107,6 +107,10 @@ export default {
 <style lang="sass" scoped>
 .PomodoroButton
 
+.mainButton,
+.subButton
+  font-family: inherit
+
 .mainButton
   font-size: 5rem
   height: 70%

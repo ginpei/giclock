@@ -30,6 +30,13 @@ select
   border-width: 1px
   color: var(--color-fg)
 
+label,
+button,
+input,
+select
+  font-family: Arial, sans-serif
+  font-size: 0.8em
+
 button
   border-style: solid
   box-sizing: border-box

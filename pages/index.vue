@@ -137,7 +137,9 @@ export default {
       this.stopChime()
 
       const el = this.$refs.chimeSound
-      el.play()
+      if (el.networkState !== el.NETWORK_NO_SOURCE) {
+        el.play()
+      }
     },
 
     stopChime () {

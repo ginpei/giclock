@@ -61,11 +61,11 @@ export const actions = {
       const preferences = JSON.parse(json)
 
       const {
-        length,
-        notifyWhenFinish,
-        ringWhenStart,
-        rotation,
-        soundName,
+        length = '25m',
+        notifyWhenFinish = true,
+        ringWhenStart = true,
+        rotation = 'none',
+        soundName = 'schoolChime',
       } = preferences
 
       commit('setLength', length)

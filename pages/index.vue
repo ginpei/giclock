@@ -98,7 +98,6 @@ export default {
     async load () {
       await this.loadPreferences()
       const { running } = await this.$store.dispatch('pomodoro/load')
-      console.log(`running? ${running}`)
       if (running) {
         this.startPomodoro({ silent: true })
       }
@@ -172,7 +171,6 @@ export default {
         throw new Error('Invalid time length')
       }
       const length = parseInt(sLength) * 60 * 1000
-      console.log(sLength, length)
       this.$store.dispatch('pomodoro/start', {
         length,
         onComplete: () => {

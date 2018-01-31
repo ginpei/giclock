@@ -58,7 +58,6 @@ export const actions = {
       const json = localStorage.getItem('giclock/pomodoro')
       const { startedAt, baseRemainingTime } = JSON.parse(json)
       const finishTime = startedAt + baseRemainingTime
-      console.log(startedAt, baseRemainingTime, new Date(finishTime))
       if (startedAt && finishTime > Date.now()) {
         const remainingTime = finishTime - Date.now()
         commit('setBaseRemainingTime', remainingTime)

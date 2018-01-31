@@ -20,9 +20,11 @@
 import SettingColumn from './SettingColumn.vue'
 import SettingLayout from './SettingLayout.vue'
 import SettingTable from './SettingTable.vue'
+import SettingCheckbox from './SettingCheckbox.vue'
 
 export {
   SettingColumn,
   SettingLayout,
   SettingTable,
+  SettingCheckbox,
 }

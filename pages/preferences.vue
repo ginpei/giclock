@@ -9,13 +9,9 @@
           option(value="schoolChime") School Chime
           option(value="none") None
       SettingColumn(title="Ring when start")
-        label.SettingLayout-input
-          input(v-model="ringWhenStart" type="checkbox")
-          | Ring
+        SettingCheckbox(:model.sync="ringWhenStart") Ring
       SettingColumn(title="Notify when finish")
-        label.SettingLayout-input
-          input(v-model="notifyWhenFinish" type="checkbox")
-          | Notify besides ringing
+        SettingCheckbox(:model.sync="notifyWhenFinish") Notify besides ringing
 
     SettingTable(heading="Visual")
       SettingColumn(title="Rotation")
@@ -46,6 +42,7 @@ import {
   SettingColumn,
   SettingLayout,
   SettingTable,
+  SettingCheckbox,
 } from '~/components/settings/index.js'
 
 export default {
@@ -53,6 +50,7 @@ export default {
     SettingColumn,
     SettingLayout,
     SettingTable,
+    SettingCheckbox,
   },
 
   data () {

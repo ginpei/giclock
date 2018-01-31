@@ -60,6 +60,7 @@ select
 
 option
   background-color: var(--color-bg)
+  color: var(--color-fg)
 
 .pinCenter
   align-items: center

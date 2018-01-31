@@ -21,7 +21,7 @@ export const getters = {
         return '' // setting empty for sound's src is OK?
 
       default:
-        console.error('store/preferences:getters:soundURL', state.soundName)
+        console.error('store/preferences:getters:soundUrl', state.soundName)
         throw new Error('Unknown sound name')
     }
   },

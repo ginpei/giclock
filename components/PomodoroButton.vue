@@ -4,21 +4,21 @@
       | {{sRestTime}}
       br
       i.fa.fa-pause-circle
-    button.subButton(v-show="working" @click="resetButton_onClick" :style="subButtonStyle" disabled)
+    button.subButton(v-show="working" @click="resetButton_onClick" disabled)
       i.fa.fa-stop-circle
       |  Reset
     button.mainButton(v-show="paused" @click="startButton_onClick" :style="mainButtonStyle")
       | {{sRestTime}}
       br
       i.fa.fa-play-circle
-    button.subButton(v-show="paused" @click="resetButton_onClick" :style="subButtonStyle")
+    button.subButton(v-show="paused" @click="resetButton_onClick")
       i.fa.fa-stop-circle
       |  Reset
     button.mainButton(v-show="stopped" @click="startButton_onClick" :style="mainButtonStyle")
       | {{sLength}}
       br
       i.fa.fa-play-circle
-    button.subButton(v-show="stopped" @click="configButton_onClick" :style="subButtonStyle")
+    button.subButton(v-show="stopped" @click="configButton_onClick")
       i.fa.fa-stopwatch
       |  Set time
 </template>
@@ -34,12 +34,6 @@ export default {
 
   computed: {
     mainButtonStyle () {
-      return {
-        color: this.exceeded ? '#f00' : null,
-      }
-    },
-
-    subButtonStyle () {
       return {
         color: this.exceeded ? '#f00' : null,
       }

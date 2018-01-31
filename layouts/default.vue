@@ -30,6 +30,16 @@ select
   border-width: 1px
   color: var(--color-fg)
 
+  &:active,
+  &.active
+    background-color: var(--color-fg)
+    color: var(--color-bg)
+
+  &:disabled,
+  &.disabled
+    border-color: transparent
+    color: var(--color-fg-disabled)
+
 label,
 button,
 input,
@@ -47,21 +57,6 @@ input,
 select
   border-style: none none solid
   padding: .5rem 0
-
-a,
-label,
-button,
-input,
-select
-  &:active,
-  &.active
-    background-color: var(--color-fg)
-    color: var(--color-bg)
-
-  &:disabled,
-  &.disabled
-    border-color: transparent
-    color: var(--color-fg-disabled)
 
 option
   background-color: var(--color-bg)

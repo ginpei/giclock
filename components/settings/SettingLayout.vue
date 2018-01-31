@@ -71,4 +71,3 @@
   display: inline-block
   width: 100%
 </style>
-

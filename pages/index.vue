@@ -63,6 +63,10 @@ export default {
       return { transform }
     },
 
+    notificationSupported () {
+      return typeof Notification === 'object'
+    },
+
     ...mapState('preferences', [
       'notifyWhenFinish',
       'ringWhenStart',
@@ -124,6 +128,10 @@ export default {
     },
 
     askNotificationPermission () {
+      if (!this.notificationSupported) {
+        return
+      }
+
       if (Notification.permission === 'denied') {
         console.warn('Notification is not granted.')
       }
@@ -148,6 +156,10 @@ export default {
     },
 
     notify (message) {
+      if (!this.notificationSupported) {
+        return
+      }
+
       if (Notification.permission !== 'granted') {
         console.warn(`Notification hasn't been granted for message "${message}"`)
         return

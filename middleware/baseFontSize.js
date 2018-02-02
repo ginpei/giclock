@@ -43,6 +43,7 @@ export default baseFontSize = {
   },
 
   activate () {
+    update()
     window.addEventListener('resize', update)
   },
 

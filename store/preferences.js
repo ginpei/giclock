@@ -8,7 +8,6 @@ export const state = () => {
     ringWhenStart: true,
     rotation: 'none',
     soundName: 'schoolChime',
-    titleType: 'static',
   }
 }
 
@@ -52,10 +51,6 @@ export const mutations = {
   setSoundName (state, soundName) {
     state.soundName = soundName
   },
-
-  setTitleType (state, titleType) {
-    state.titleType = titleType
-  },
 }
 
 export const actions = {
@@ -71,7 +66,6 @@ export const actions = {
         ringWhenStart = true,
         rotation = 'none',
         soundName = 'schoolChime',
-        titleType = 'static',
       } = preferences
 
       commit('setLength', length)
@@ -79,7 +73,6 @@ export const actions = {
       commit('setRingWhenStart', ringWhenStart)
       commit('setRotation', rotation)
       commit('setSoundName', soundName)
-      commit('setTitleType', titleType)
     }
     catch (error) {
       // just ignore
@@ -95,7 +88,6 @@ export const actions = {
       ringWhenStart,
       rotation,
       soundName,
-      titleType,
     } = preferences
     const data = {
       length,
@@ -103,7 +95,6 @@ export const actions = {
       ringWhenStart,
       rotation,
       soundName,
-      titleType,
     }
 
     commit('setLength', length)
@@ -111,7 +102,6 @@ export const actions = {
     commit('setRingWhenStart', ringWhenStart)
     commit('setRotation', rotation)
     commit('setSoundName', soundName)
-    commit('setTitleType', titleType)
 
     const json = JSON.stringify(data)
     localStorage.setItem('giclock/preferences', json)
@@ -124,7 +114,6 @@ export const actions = {
       ringWhenStart: true,
       rotation: 'none',
       soundName: 'schoolChime',
-      titleType: 'static',
     }
     dispatch('save', data)
   },

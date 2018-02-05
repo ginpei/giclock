@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.container.pinCenter
+  section.container.pinCenter(:class="className")
     div.layoutBox.pinCenter(:style="layoutBoxStyle")
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel(:style="layoutBoxStyle")
@@ -37,6 +37,7 @@ export default {
 
   data () {
     return {
+      initialized: false,
       length: '',
       now: new Date(),
       pomodoroStartedAt: 0,
@@ -57,6 +58,12 @@ export default {
         title = 'Clock'
       }
       return title
+    },
+
+    className () {
+      return {
+        cloak: !this.initialized,
+      }
     },
 
     pomodoroWorking () {
@@ -108,6 +115,8 @@ export default {
     this.f_updateLayout()
 
     this.load()
+
+    this.initialized = true
   },
 
   destroyed () {
@@ -234,6 +243,8 @@ export default {
 <style lang="sass" scoped>
 .container
   min-height: 100vh
+  opacity: 1
+  transition: opacity 1s
 
   @media (orientation: portrait)
     &
@@ -242,6 +253,10 @@ export default {
   @media (orientation: landscape)
     &
       flex-direction: row
+
+  &.cloak
+    opacity: 0
+    transition: opacity 0s
 
 .layoutBox
   height: 50rem

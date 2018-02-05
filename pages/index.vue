@@ -19,6 +19,7 @@ import AnalogClock from '~/components/AnalogClock.vue'
 import DigitalClock from '~/components/DigitalClock.vue'
 import PomodoroButton from '~/components/PomodoroButton.vue'
 import baseFontSize from '~/middleware/baseFontSize.js'
+import { sCurrentTime, sTimeRange } from '~/middleware/time.js'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
@@ -26,6 +27,12 @@ export default {
     AnalogClock,
     DigitalClock,
     PomodoroButton,
+  },
+
+  head () {
+    return {
+      title: this.title,
+    }
   },
 
   data () {
@@ -38,6 +45,20 @@ export default {
   },
 
   computed: {
+    title () {
+      let title
+      if (this.titleType === 'currentTime') {
+        title = sCurrentTime(this.now)
+      }
+      else if (this.titleType === 'remainingTime' && (this.pomodoroWorking || this.pomodoroRestTime)) {
+        title = sTimeRange(this.pomodoroRestTime)
+      }
+      else {
+        title = 'Clock'
+      }
+      return title
+    },
+
     pomodoroWorking () {
       return this.$store.getters['pomodoro/working']
     },
@@ -67,6 +88,7 @@ export default {
       'notifyWhenFinish',
       'ringWhenStart',
       'soundName',
+      'titleType',
     ]),
 
     ...mapGetters('preferences', [

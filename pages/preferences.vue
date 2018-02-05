@@ -14,6 +14,11 @@
         SettingCheckbox(:model.sync="notifyWhenFinish") Notify besides ringing
 
     SettingTable(heading="Visual")
+      SettingColumn(title="Title")
+        select.SettingLayout-input(v-model="titleType")
+          option(value="static") Static ("Clock")
+          option(value="currentTime") Current time
+          option(value="remainingTime") Remaining time (while running)
       SettingColumn(title="Rotation")
         select.SettingLayout-input(v-model="rotation")
           option(value="none") None
@@ -53,6 +58,12 @@ export default {
     SettingCheckbox,
   },
 
+  head () {
+    return {
+      title: 'Preferences - Clock',
+    }
+  },
+
   data () {
     return {
       length: '',
@@ -65,6 +76,7 @@ export default {
       pastRotation: '',
       pastSoundName: '',
       soundName: '',
+      titleType: '',
     }
   },
 
@@ -89,6 +101,7 @@ export default {
         ringWhenStart: this.ringWhenStart,
         rotation: this.rotation,
         soundName: this.soundName,
+        titleType: this.titleType,
       }
       this.$store.dispatch('preferences/save', data)
     },
@@ -100,13 +113,14 @@ export default {
       this.ringWhenStart = this.$store.state.preferences.ringWhenStart
       this.rotation = this.$store.state.preferences.rotation
       this.soundName = this.$store.state.preferences.soundName
+      this.titleType = this.$store.state.preferences.titleType
 
       if (!this.initialized) {
         this.pastLength = this.$store.state.preferences.length
         this.pastNotifyWhenFinish = this.$store.state.preferences.notifyWhenFinish
         this.pastRingWhenStart = this.$store.state.preferences.ringWhenStart
         this.pastRotation = this.$store.state.preferences.rotation
-        this.pastSoundName = this.$store.state.preferences.soundName
+        this.pastTitleType = this.$store.state.preferences.titleType
       }
 
       this.initialized = true

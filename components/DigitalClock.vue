@@ -1,18 +1,13 @@
 <template lang="pug">
   div.DigitalClock
-    div.time
-      span.hours {{sHours}}
-      span.delimiter :
-      span.minutes {{sMinutes}}
-      span.delimiter :
-      span.seconds {{sSeconds}}
+    div.time {{sCurrentTime}}
     div.date
       | {{sYear}}-{{sMonth}}-{{sDate}}
       span.yobi ({{sYobi}})
 </template>
 
 <script>
-import { sHours, sMinutes, sSeconds } from '~/middleware/time.js'
+import { sCurrentTime } from '~/middleware/time.js'
 
 export default {
   props: [
@@ -20,16 +15,8 @@ export default {
   ],
 
   computed: {
-    sHours () {
-      return sHours(this.now)
-    },
-
-    sMinutes () {
-      return sMinutes(this.now)
-    },
-
-    sSeconds () {
-      return sSeconds(this.now)
+    sCurrentTime () {
+      return sCurrentTime(this.now)
     },
 
     sYear () {

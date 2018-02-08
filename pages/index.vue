@@ -267,6 +267,9 @@ export default {
   width: 100%
 
 .preferencesLink
+  border-style: solid
+  border-width: 1px
+  box-sizing: border-box
   font-size: 3rem
   height: 100%
   text-decoration: none

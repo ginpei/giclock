@@ -264,7 +264,7 @@ export default {
 
 .pomodoroButton
   height: 100%
-  width: 100%
+  width: calc(100% + 1px)
 
 .preferencesLink
   border-style: solid

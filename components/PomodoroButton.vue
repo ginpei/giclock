@@ -89,6 +89,8 @@ export default {
 
 <style lang="sass" scoped>
 .PomodoroButton
+  display: grid
+  grid-template-rows: 70% auto
 
 .mainButton,
 .subButton
@@ -96,11 +98,11 @@ export default {
 
 .mainButton
   font-size: 5rem
-  height: 70%
+  height: calc(100% + 1px)
   width: 100%
 
 .subButton
   font-size: 3rem
-  height: 30%
+  height: 100%
   width: 100%
 </style>

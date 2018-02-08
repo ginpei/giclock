@@ -10,6 +10,7 @@
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
+          span(hidden) Preferences
     div.sounds
       audio(:src="soundUrl" ref="chimeSound")
 </template>

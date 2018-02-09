@@ -26,8 +26,8 @@ function update () {
     width: 100%;
   `)
   document.body.appendChild(el)
-  const width = el.clientWidth
-  const height = el.clientHeight
+  const width = el.clientWidth - 2 // decrease for margin around the content
+  const height = el.clientHeight - 2
   document.body.removeChild(el)
 
   const size = calculateFontSize({ width, height })

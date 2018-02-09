@@ -16,9 +16,19 @@ export function calculateFontSize ({ width, height }) {
 }
 
 function update () {
-  const el = document.scrollingElement
+  const el = document.createElement('div')
+  el.setAttribute('style', `
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    visibility: visible;
+    width: 100%;
+  `)
+  document.body.appendChild(el)
   const width = el.clientWidth
   const height = el.clientHeight
+  document.body.removeChild(el)
 
   const size = calculateFontSize({ width, height })
   document.documentElement.style.fontSize = `${size}px`

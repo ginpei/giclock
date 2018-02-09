@@ -85,16 +85,12 @@ export default {
 
     baseFontSize.activate()
 
-    this.f_updateLayout = () => this.updateLayout()
-    baseFontSize.on('change', this.f_updateLayout)
-    this.f_updateLayout()
-
     this.load()
   },
 
   destroyed () {
-    baseFontSize.off('change', this.f_updateLayout)
     baseFontSize.deactivate()
+
     clearInterval(this.tmTick)
   },
 
@@ -111,20 +107,6 @@ export default {
       this.$store.dispatch('preferences/load')
       this.length = this.$store.state.preferences.length
       this.rotation = this.$store.state.preferences.rotation
-    },
-
-    updateLayout () {
-      this.updateRootFontSize()
-    },
-
-    updateRootFontSize () {
-      const el = document.scrollingElement
-      const w = el.clientWidth
-      const h = el.clientHeight
-      const length = h > w ? Math.min(w, h / 2) : Math.min(w / 2, h)
-
-      // affects rem unit
-      document.documentElement.style.fontSize = `${length / 50}px`
     },
 
     askNotificationPermission () {

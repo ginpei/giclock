@@ -24,11 +24,14 @@ function sCurrentTime (date) {
 }
 
 function sTimeRange (timeRange) {
-  //  0     -> '0:00'
-  //  0.001 -> '0:01'
-  // 60.000 -> '1:00'
-  // 59.001 -> '1:00'
-  // 59.000 -> '0:59'
+  // -1.000 -> -0:01
+  // -0.001 ->  0:00
+  //  0.000 ->  0:00
+  //  0.001 ->  0:01
+  //  1.000 ->  0:01
+  // 59.000 ->  0:59
+  // 59.001 ->  1:00
+  // 60.000 ->  1:00
 
   const restTimeInSeconds = Math.ceil(timeRange / 1000)
   if (isNaN(restTimeInSeconds)) {

@@ -8,14 +8,19 @@ const listeners = {
   change: new Set(),
 }
 
+export function calculateFontSize ({ width, height }) {
+  const length = height > width ? Math.min(width, height / 2) : Math.min(width / 2, height)
+  const size = length / 50
+  console.log('# width, height, size', width, height, size)
+  return size
+}
+
 function update () {
   const el = document.scrollingElement
-  const w = el.clientWidth
-  const h = el.clientHeight
-  const length = h > w ? Math.min(w, h / 2) : Math.min(w / 2, h)
+  const width = el.clientWidth
+  const height = el.clientHeight
 
-  // affects rem unit
-  const size = length / 50
+  const size = calculateFontSize({ width, height })
   document.documentElement.style.fontSize = `${size}px`
 
   listeners.change.forEach(f => f(size))

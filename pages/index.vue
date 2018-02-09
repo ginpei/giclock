@@ -31,7 +31,6 @@ export default {
 
   data () {
     return {
-      alignment: '',
       initialized: false,
       length: '',
       now: new Date(),

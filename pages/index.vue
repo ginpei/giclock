@@ -32,10 +32,8 @@ export default {
   data () {
     return {
       initialized: false,
-      length: '',
       now: new Date(),
       pomodoroStartedAt: 0,
-      rotation: '',
     }
   },
 
@@ -65,7 +63,7 @@ export default {
     },
 
     layoutBoxStyle () {
-      const rotationKey = this.$store.state.preferences.rotation
+      const rotationKey = this.rotation
       const rotation = rotationKey === 'right' ? '-90deg' : rotationKey === 'left' ? '90deg' : '0deg'
       const transform = `rotate(${rotation})`
 
@@ -78,8 +76,10 @@ export default {
 
     ...mapState('preferences', [
       'alignment',
+      'length',
       'notifyWhenFinish',
       'ringWhenStart',
+      'rotation',
       'soundName',
     ]),
 
@@ -117,9 +117,6 @@ export default {
 
     loadPreferences () {
       this.$store.dispatch('preferences/load')
-      this.alignment = this.$store.state.preferences.alignment
-      this.length = this.$store.state.preferences.length
-      this.rotation = this.$store.state.preferences.rotation
     },
 
     askNotificationPermission () {

@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.container.pinCenter
+  section.container.pinCenter(:class="className")
     div.layoutBox.pinCenter(:style="layoutBoxStyle")
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel(:style="layoutBoxStyle")
@@ -10,6 +10,7 @@
       div.rightBottom.pinCenter
         a.pinCenter.preferencesLink(href="/preferences")
           i.fas.fa-cog
+          span(hidden) Preferences
     div.sounds
       audio(:src="soundUrl" ref="chimeSound")
 </template>
@@ -30,6 +31,7 @@ export default {
 
   data () {
     return {
+      initialized: false,
       length: '',
       now: new Date(),
       pomodoroStartedAt: 0,
@@ -38,6 +40,12 @@ export default {
   },
 
   computed: {
+    className () {
+      return {
+        cloak: !this.initialized,
+      }
+    },
+
     pomodoroWorking () {
       return this.$store.getters['pomodoro/working']
     },
@@ -86,6 +94,8 @@ export default {
     baseFontSize.activate()
 
     this.load()
+
+    this.initialized = true
   },
 
   destroyed () {
@@ -206,6 +216,8 @@ export default {
 <style lang="sass" scoped>
 .container
   min-height: 100vh
+  opacity: 1
+  transition: opacity 1s
 
   @media (orientation: portrait)
     &
@@ -214,6 +226,10 @@ export default {
   @media (orientation: landscape)
     &
       flex-direction: row
+
+  &.cloak
+    opacity: 0
+    transition: opacity 0s
 
 .layoutBox
   height: 50rem
@@ -242,9 +258,12 @@ export default {
 
 .pomodoroButton
   height: 100%
-  width: 100%
+  width: calc(100% + 1px)
 
 .preferencesLink
+  border-style: solid
+  border-width: 1px
+  box-sizing: border-box
   font-size: 3rem
   height: 100%
   text-decoration: none

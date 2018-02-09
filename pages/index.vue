@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.container.pinCenter(:class="className")
+  section.container(:class="className")
     div.layoutBox.pinCenter(:style="layoutBoxStyle")
       AnalogClock.analogClock(:now="now")
     div.layoutBox.multiPanel(:style="layoutBoxStyle")
@@ -31,6 +31,7 @@ export default {
 
   data () {
     return {
+      alignment: '',
       initialized: false,
       length: '',
       now: new Date(),
@@ -43,6 +44,7 @@ export default {
     className () {
       return {
         cloak: !this.initialized,
+        '--center': this.alignment === 'center',
       }
     },
 
@@ -76,6 +78,7 @@ export default {
     },
 
     ...mapState('preferences', [
+      'alignment',
       'notifyWhenFinish',
       'ringWhenStart',
       'soundName',
@@ -115,6 +118,7 @@ export default {
 
     loadPreferences () {
       this.$store.dispatch('preferences/load')
+      this.alignment = this.$store.state.preferences.alignment
       this.length = this.$store.state.preferences.length
       this.rotation = this.$store.state.preferences.rotation
     },
@@ -218,6 +222,11 @@ export default {
   min-height: 100vh
   opacity: 1
   transition: opacity 1s
+  align-items: center
+  display: flex
+
+  &.--center
+    justify-content: center
 
   @media (orientation: portrait)
     &

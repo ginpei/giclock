@@ -1,5 +1,6 @@
 export const state = () => {
   return {
+    alignment: 'center',
     bgColor: '#000',
     fgColor: '#0f9',
     length: '25m',
@@ -28,6 +29,10 @@ export const getters = {
 }
 
 export const mutations = {
+  setAlignment (state, alignment) {
+    state.alignment = alignment
+  },
+
   setLength (state, length) {
     state.length = length
   },
@@ -61,6 +66,7 @@ export const actions = {
       const preferences = JSON.parse(json)
 
       const {
+        alignment = 'center',
         length = '25m',
         notifyWhenFinish = true,
         ringWhenStart = true,
@@ -68,6 +74,7 @@ export const actions = {
         soundName = 'schoolChime',
       } = preferences
 
+      commit('setAlignment', alignment)
       commit('setLength', length)
       commit('setNotifyWhenFinish', notifyWhenFinish)
       commit('setRingWhenStart', ringWhenStart)
@@ -83,6 +90,7 @@ export const actions = {
 
   save ({ state, commit }, preferences) {
     const {
+      alignment,
       length,
       notifyWhenFinish,
       ringWhenStart,
@@ -90,6 +98,7 @@ export const actions = {
       soundName,
     } = preferences
     const data = {
+      alignment,
       length,
       notifyWhenFinish,
       ringWhenStart,
@@ -97,6 +106,7 @@ export const actions = {
       soundName,
     }
 
+    commit('setAlignment', alignment)
     commit('setLength', length)
     commit('setNotifyWhenFinish', notifyWhenFinish)
     commit('setRingWhenStart', ringWhenStart)

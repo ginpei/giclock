@@ -14,6 +14,10 @@
         SettingCheckbox(:model.sync="notifyWhenFinish") Notify besides ringing
 
     SettingTable(heading="Visual")
+      SettingColumn(title="Alignment")
+        select.SettingLayout-input(v-model="alignment")
+          option(value="center") Center
+          option(value="top") Top
       SettingColumn(title="Rotation")
         select.SettingLayout-input(v-model="rotation")
           option(value="none") None
@@ -55,10 +59,12 @@ export default {
 
   data () {
     return {
+      alignment: '',
       length: '',
       notifyWhenFinish: false,
       ringWhenStart: false,
       rotation: '',
+      pastAlignment: '',
       pastLength: '',
       pastNotifyWhenFinish: false,
       pastRingWhenStart: false,
@@ -83,6 +89,7 @@ export default {
   methods: {
     save () {
       const data = {
+        alignment: this.alignment,
         initialized: false,
         length: this.length,
         notifyWhenFinish: this.notifyWhenFinish,
@@ -95,6 +102,7 @@ export default {
 
     load () {
       this.$store.dispatch('preferences/load')
+      this.alignment = this.$store.state.preferences.alignment
       this.length = this.$store.state.preferences.length
       this.notifyWhenFinish = this.$store.state.preferences.notifyWhenFinish
       this.ringWhenStart = this.$store.state.preferences.ringWhenStart
@@ -102,6 +110,7 @@ export default {
       this.soundName = this.$store.state.preferences.soundName
 
       if (!this.initialized) {
+        this.pastAlignment = this.$store.state.preferences.alignment
         this.pastLength = this.$store.state.preferences.length
         this.pastNotifyWhenFinish = this.$store.state.preferences.notifyWhenFinish
         this.pastRingWhenStart = this.$store.state.preferences.ringWhenStart
@@ -126,6 +135,7 @@ export default {
     },
 
     revert_onClick (event) {
+      this.alignment = this.pastAlignment
       this.length = this.pastLength
       this.notifyWhenFinish = this.pastNotifyWhenFinish
       this.rotation = this.pastRotation

@@ -55,4 +55,20 @@ module.exports = {
       }
     },
   },
+  workbox: {
+    runtimeCaching: [
+      {
+        handler: 'networkFirst',
+        urlPattern: 'https://fonts.googleapis.com/css?.*',
+      },
+      {
+        handler: 'networkFirst',
+        urlPattern: 'https://fonts.gstatic.com/.*',
+      },
+      {
+        handler: 'networkFirst',
+        urlPattern: 'https://use.fontawesome.com/.*',
+      },
+    ],
+  },
 }

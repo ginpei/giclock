@@ -1,4 +1,22 @@
 module.exports = {
+  modules: [
+    '@nuxtjs/pwa',
+  ],
+  manifest: {
+    name: 'Clock',
+    short_name: 'Clock',
+    start_url: '/',
+    background_color: '#000',
+    theme_color: '#0f9',
+    display: 'standalone',
+    icons: [
+      {
+        sizes: '512x512',
+        src: '/icon512.png',
+        type: 'image/png',
+      },
+    ],
+  },
   /*
   ** Headers of the page
   */

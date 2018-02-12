@@ -37,7 +37,7 @@ export default {
     },
 
     circleRadius () {
-      return this.length / 2 - this.circleStrokeWidth * 6 // ?
+      return Math.max(this.length / 2 - this.circleStrokeWidth * 6, 0) // ?
     },
 
     hoursProgress () {

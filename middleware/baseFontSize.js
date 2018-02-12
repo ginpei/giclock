@@ -11,7 +11,6 @@ const listeners = {
 export function calculateFontSize ({ width, height }) {
   const length = height > width ? Math.min(width, height / 2) : Math.min(width / 2, height)
   const size = length / 50
-  console.log('# width, height, size', width, height, size)
   return size
 }
 

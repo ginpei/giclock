@@ -32,7 +32,7 @@ An analog and digital clock with "pomodoro" timer.
 ## Web standard APIs
 
 - [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) in order for [PWA](https://developer.mozilla.org/en-US/Apps/Progressive)
-- [CSS Grid Layout - CSS | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) (new)
+- [CSS Grid Layout](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) (new)
 - [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) from ES2017
 
 ## Services

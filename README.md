@@ -27,6 +27,7 @@ An analog and digital clock with "pomodoro" timer.
 - [push-dir](https://github.com/L33T-KR3W/push-dir) (new)
 - [yarn](https://yarnpkg.com/)
 - [vue-cli](https://github.com/vuejs/vue-cli) (new)
+- [Visual Studio Code](https://code.visualstudio.com/) (new)
 
 ## Web standard APIs
 

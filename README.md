@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/ginpei/giclock.svg?branch=master)](https://travis-ci.org/ginpei/giclock)
 [![Greenkeeper badge](https://badges.greenkeeper.io/ginpei/giclock.svg)](https://greenkeeper.io/)
 
+An analog and digital clock with "pomodoro" timer.
+
 - App https://clock.ginpei.info/
 - Codes https://github.com/ginpei/giclock/
 

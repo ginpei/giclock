@@ -49,6 +49,22 @@ function sTimeRange (timeRange) {
   return sRestTime
 }
 
+function sYear (date) {
+  return date.getFullYear()
+}
+
+function sMonth (date) {
+  return '01 02 03 04 05 06 07 08 09 10 11 12'.split(' ')[date.getMonth()]
+}
+
+function sDate (date) {
+  return twoDigitize(date.getDate())
+}
+
+function sFullDate (date) {
+  return `${sYear(date)}-${sMonth(date)}-${sDate(date)}`
+}
+
 export {
   now,
   sHours,
@@ -56,4 +72,5 @@ export {
   sSeconds,
   sCurrentTime,
   sTimeRange,
+  sFullDate,
 }

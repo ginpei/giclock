@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { sTimeRange } from '../../middleware/time.js'
+import { sTimeRange, sFullDate } from '../../middleware/time.js'
 
 describe('time', () => {
   beforeEach(() => {
@@ -55,6 +55,23 @@ describe('time', () => {
       expect(sTimeRange(-1001)).to.eql('0m -1s')
       expect(sTimeRange(-59999)).to.eql('0m -59s')
       expect(sTimeRange(-60001)).to.eql('-1m 0s')
+    })
+  })
+
+  describe('sFullDate', () => {
+    it('UNIX time of 2000-11-23', () => {
+      const date = new Date()
+      date.setFullYear(2000)
+      date.setMonth(11 - 1)
+      date.setDate(23)
+      expect(sFullDate(date)).to.eql('2000-11-23')
+    })
+    it('fills 0 for numbers less than 10', () => {
+      const date = new Date()
+      date.setFullYear(2000)
+      date.setMonth(1 - 1)
+      date.setDate(1)
+      expect(sFullDate(date)).to.eql('2000-01-01')
     })
   })
 })

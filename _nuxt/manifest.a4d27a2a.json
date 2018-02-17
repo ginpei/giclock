@@ -1,0 +1,1 @@
+{"name":"Clock","short_name":"Clock","description":"Clock","publicPath":"//_nuxt/","icons":[{"sizes":"512x512","src":"/icon512.png","type":"image/png"}],"start_url":"/","display":"standalone","background_color":"#000","theme_color":"#0f9","lang":"en"}

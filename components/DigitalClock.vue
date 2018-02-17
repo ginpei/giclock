@@ -2,12 +2,12 @@
   div.DigitalClock
     div.time {{sCurrentTime}}
     div.date
-      | {{sYear}}-{{sMonth}}-{{sDate}}
+      | {{sFullDate}}
       span.yobi ({{sYobi}})
 </template>
 
 <script>
-import { sCurrentTime } from '~/middleware/time.js'
+import { sCurrentTime, sFullDate } from '~/middleware/time.js'
 
 export default {
   props: [
@@ -19,16 +19,8 @@ export default {
       return sCurrentTime(this.now)
     },
 
-    sYear () {
-      return this.now.getFullYear()
-    },
-
-    sMonth () {
-      return '01 02 03 04 05 06 07 08 09 10 11 12'.split(' ')[this.now.getMonth()]
-    },
-
-    sDate () {
-      return this.now.getDate()
+    sFullDate () {
+      return sFullDate(this.now)
     },
 
     sYobi () {

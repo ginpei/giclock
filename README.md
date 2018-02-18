@@ -41,6 +41,7 @@ An analog and digital clock with "pomodoro" timer.
 - [Greenkeeper](https://greenkeeper.io/)
 - [Git](https://git-scm.com/) + [GitHub](https://github.com/)
 - [GitHub Pages](https://pages.github.com/)
+- [CloudFlare](https://www.cloudflare.com/) (new)
 
 # Development
 

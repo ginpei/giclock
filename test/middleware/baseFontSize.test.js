@@ -1,6 +1,5 @@
 import { expect } from 'chai'
-import sinon from 'sinon'
-import baseFontSize, { calculateFontSize } from '../../middleware/baseFontSize.js'
+import { calculateFontSize } from '../../middleware/baseFontSize.js'
 
 describe('baseFontSize', () => {
   // beforeEach(() => {
